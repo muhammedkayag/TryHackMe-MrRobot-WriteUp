@@ -54,13 +54,12 @@ Nmap done: 1 IP address (1 host up) scanned in 6.31 seconds
 
 ```
 ┌─[root@parrot]─[/home/parrot]
-└──╼ #nmap -sC -sV -A -Pn -p 22,80 10.10.240.142
+└──╼ #nmap -sC -sV -A -Pn -p 80,443 10.10.240.142
 Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-05-07 00:36 +03
 Nmap scan report for 10.10.240.142
 Host is up (0.49s latency).
 Not shown: 997 filtered tcp ports (no-response)
 PORT    STATE  SERVICE  VERSION
-22/tcp  closed ssh
 80/tcp  open   http     Apache httpd
 |_http-server-header: Apache
 |_http-title: Site doesn't have a title (text/html).
@@ -91,7 +90,112 @@ So we see only to ports are open end with this services and the versions we cant
 
 
 ```
-
+gobuster dir -u http://10.10.240.142 -w common.txt -x php,html,txt,old,cgi
+===============================================================
+Gobuster v3.6
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:                     http://10.10.240.142
+[+] Method:                  GET
+[+] Threads:                 10
+[+] Wordlist:                common.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster/3.6
+[+] Extensions:              php,html,txt,old,cgi
+[+] Timeout:                 10s
+===============================================================
+Starting gobuster in directory enumeration mode
+===============================================================
+/.html                (Status: 403) [Size: 214]
+/.hta                 (Status: 403) [Size: 213]
+/.hta.txt             (Status: 403) [Size: 217]
+/.hta.old             (Status: 403) [Size: 217]
+/.hta.cgi             (Status: 403) [Size: 217]
+/.hta.php             (Status: 403) [Size: 217]
+/.hta.html            (Status: 403) [Size: 218]
+/.htaccess            (Status: 403) [Size: 218]
+/.htaccess.html       (Status: 403) [Size: 223]
+/.htaccess.php        (Status: 403) [Size: 222]
+/.htaccess.txt        (Status: 403) [Size: 222]
+/.htaccess.old        (Status: 403) [Size: 222]
+/.htaccess.cgi        (Status: 403) [Size: 222]
+/.htpasswd            (Status: 403) [Size: 218]
+/.htpasswd.txt        (Status: 403) [Size: 222]
+/.htpasswd.old        (Status: 403) [Size: 222]
+/.htpasswd.cgi        (Status: 403) [Size: 222]
+/.htpasswd.php        (Status: 403) [Size: 222]
+/.htpasswd.html       (Status: 403) [Size: 223]
+Progress: 709 / 27690 (2.56%)[ERROR] context deadline exceeded (Client.Timeout or context cancellation while reading body)
+[ERROR] context deadline exceeded (Client.Timeout or context cancellation while reading body)
+/0                    (Status: 301) [Size: 0] [--> http://10.10.240.142/0/]
+/admin                (Status: 301) [Size: 235] [--> http://10.10.240.142/admin/]
+/atom                 (Status: 301) [Size: 0] [--> http://10.10.240.142/feed/atom/]
+/audio                (Status: 301) [Size: 235] [--> http://10.10.240.142/audio/]
+/blog                 (Status: 301) [Size: 234] [--> http://10.10.240.142/blog/]
+/cgi-bin/.html        (Status: 403) [Size: 222]
+/css                  (Status: 301) [Size: 233] [--> http://10.10.240.142/css/]
+/dashboard            (Status: 302) [Size: 0] [--> http://10.10.240.142/wp-admin/]
+/favicon.ico          (Status: 200) [Size: 0]
+/feed                 (Status: 301) [Size: 0] [--> http://10.10.240.142/feed/]
+/image                (Status: 301) [Size: 0] [--> http://10.10.240.142/image/]
+/Image                (Status: 301) [Size: 0] [--> http://10.10.240.142/Image/]
+/images               (Status: 301) [Size: 236] [--> http://10.10.240.142/images/]
+/index.php            (Status: 301) [Size: 0] [--> http://10.10.240.142/]
+/index.html           (Status: 200) [Size: 1188]
+/index.html           (Status: 200) [Size: 1188]
+/index.php            (Status: 301) [Size: 0] [--> http://10.10.240.142/]
+Progress: 12692 / 27690 (45.84%)[ERROR] context deadline exceeded (Client.Timeout or context cancellation while reading body)
+/js                   (Status: 301) [Size: 232] [--> http://10.10.240.142/js/]
+/license              (Status: 200) [Size: 309]
+/license.txt          (Status: 200) [Size: 309]
+/login                (Status: 302) [Size: 0] [--> http://10.10.240.142/wp-login.php]
+/page1                (Status: 301) [Size: 0] [--> http://10.10.240.142/]
+/phpmyadmin           (Status: 403) [Size: 94]
+/rdf                  (Status: 301) [Size: 0] [--> http://10.10.240.142/feed/rdf/]
+/readme               (Status: 200) [Size: 64]
+/readme.html          (Status: 200) [Size: 64]
+/robots               (Status: 200) [Size: 41]
+/robots.txt           (Status: 200) [Size: 41]
+/robots.txt           (Status: 200) [Size: 41]
+/rss                  (Status: 301) [Size: 0] [--> http://10.10.240.142/feed/]
+/rss2                 (Status: 301) [Size: 0] [--> http://10.10.240.142/feed/]
+/sitemap              (Status: 200) [Size: 0]
+/sitemap.xml          (Status: 200) [Size: 0]
+/video                (Status: 301) [Size: 235] [--> http://10.10.240.142/video/]
+/wp-admin             (Status: 301) [Size: 238] [--> http://10.10.240.142/wp-admin/]
+/wp-app.php           (Status: 403) [Size: 0]
+/wp-atom.php          (Status: 301) [Size: 0] [--> http://10.10.240.142/feed/atom/]
+/wp-commentsrss2.php  (Status: 301) [Size: 0] [--> http://10.10.240.142/comments/feed/]
+/wp-config.php        (Status: 200) [Size: 0]
+/wp-config            (Status: 200) [Size: 0]
+/wp-content           (Status: 301) [Size: 240] [--> http://10.10.240.142/wp-content/]
+/wp-cron.php          (Status: 200) [Size: 0]
+/wp-cron              (Status: 200) [Size: 0]
+/wp-feed.php          (Status: 301) [Size: 0] [--> http://10.10.240.142/feed/]
+/wp-includes          (Status: 301) [Size: 241] [--> http://10.10.240.142/wp-includes/]
+/wp-links-opml        (Status: 200) [Size: 227]
+/wp-load              (Status: 200) [Size: 0]
+/wp-links-opml.php    (Status: 200) [Size: 227]
+/wp-load.php          (Status: 200) [Size: 0]
+/wp-login             (Status: 200) [Size: 2671]
+/wp-login.php         (Status: 200) [Size: 2671]
+/wp-mail              (Status: 500) [Size: 3064]
+/wp-mail.php          (Status: 500) [Size: 3025]
+/wp-rdf.php           (Status: 301) [Size: 0] [--> http://10.10.240.142/feed/rdf/]
+/wp-register.php      (Status: 301) [Size: 0] [--> http://10.10.240.142/wp-login.php?action=register]
+/wp-rss.php           (Status: 301) [Size: 0] [--> http://10.10.240.142/feed/]
+/wp-rss2.php          (Status: 301) [Size: 0] [--> http://10.10.240.142/feed/]
+/wp-settings          (Status: 500) [Size: 0]
+/wp-settings.php      (Status: 500) [Size: 0]
+/wp-signup            (Status: 302) [Size: 0] [--> http://10.10.240.142/wp-login.php?action=register]
+/wp-signup.php        (Status: 302) [Size: 0] [--> http://10.10.240.142/wp-login.php?action=register]
+/xmlrpc.php           (Status: 405) [Size: 42]
+/xmlrpc               (Status: 405) [Size: 42]
+/xmlrpc.php           (Status: 405) [Size: 42]
+Progress: 27684 / 27690 (99.98%)
+===============================================================
+Finished
+===============================================================
 ```
 
 
@@ -112,4 +216,26 @@ when we use the commands we dont get something useful. So we decide to look at t
 
 
 
+in the http://10.10.240.142/key-1-of-3.txt we get our first flag. And in the same location fsocity.dic file is a very long wordlist when we look at the second flag hint it says: There's something fishy about this wordlist... Why is it so long?  so i when we look inside of the file there is so much words repeates and most of them is very short so we guess its a password list so we should find the login page and username and we should make fsocity.dic file shorter. In gobuster we saw /login directory when we go the page we see its a wordpress login page:
 
+
+
+![](pics/m3.png)
+
+
+
+So there is a useful flaw in the site it says the invalid usernames. We see there is no user named admin according to we are in the MrRobot Ctf when we try elliot as username we receive a different message:
+
+
+
+![](pics/m4.png)
+
+
+
+so we now we should make our fscotiy.dic file shorter for this we can use python i coded a python program that finds words does not repeat, does not consist only of letters or numbers , longer than six digits and creates a new wordlist with these words the programs source code is:
+
+
+
+```
+
+```
