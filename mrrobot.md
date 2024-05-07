@@ -232,10 +232,53 @@ So there is a useful flaw in the site it says the invalid usernames. We see ther
 
 
 
-so we now we should make our fscotiy.dic file shorter for this we can use python i coded a python program that finds words does not repeat, does not consist only of letters or numbers , longer than six digits and creates a new wordlist with these words the programs source code is:
+So now we should make our fscotiy.dic file shorter.I think our friend elliot doesn't use passwords shorter than six digits. I coded a python program that finds words does not repeat, longer than five digits and creates a new wordlist with these words.Programs source code is:
 
 
 
 ```
+def main():
+    input_file = 'fsocity.dic'
+    output_file = 'new.txt'
 
+    
+    filtered_words = set()
+
+    
+    with open(input_file, 'r') as file:
+        for line in file:
+            word = line.strip()
+            if len(word) > 5:
+                filtered_words.add(word)
+
+    
+    with open(output_file, 'w') as file:
+        for word in filtered_words:
+            file.write(word + '\n')
+
+    
+
+if __name__ == "__main__":
+    main()
+
+
+
+This program makes a shorter wordlist called new.txt .But we need a another tool to start bruteforce attack on login page. This site is built with wordpress so we can use the tool caled wpscan if dont have it you can install it with this commands:
+
+
+
+```
+sudo apt-get update 
+```
+```
+sudo apt install ruby ruby-dev 
+```
+```
+sudo apt install gem
+```
+```
+sudo apt install build-essential libcurl4-openssl-dev libxml2 libxml2-dev libxslt1-dev ruby-dev libgmp-dev zlib1g-dev 
+```
+```
+sudo gem install wpscan
 ```
