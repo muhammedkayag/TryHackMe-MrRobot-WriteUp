@@ -6,7 +6,7 @@
 
 
 
-Hello friend, welcome to my MrRobot WriteUp! Mr.Robot is one of the best shows i have ever watched. In this writeup i am gonna show you how did i solve this ctf. So first we start with the enumeration with rustscan and nmap:
+Hello friend, welcome to my Mr.Robot WriteUp! Mr.Robot is one of the best shows i have ever watched. In this writeup i am gonna show you how did i solve this ctf. So first we start with the enumeration with rustscan and nmap:
 
 
 
