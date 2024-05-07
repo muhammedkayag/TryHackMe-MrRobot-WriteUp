@@ -89,7 +89,7 @@ Nmap done: 1 IP address (1 host up) scanned in 163.35 seconds
 
 
 
-So we see only to ports are open end with this services and the versions we cant do something useful. We keep enumeration on port 80 with gobuster:
+So we see only two ports are open and with this services and the versions we cant do something useful. We keep enumeration on port 80 with gobuster:
 
 
 
@@ -204,7 +204,7 @@ Finished
 
 
 
-And then we see some directories when we go to the website a cool terminal welcomes us:
+And then we see some directories. When we go to the website a cool terminal welcomes us:
 
 
 
@@ -220,7 +220,7 @@ when we use the commands we dont get something useful. So we decide to look at t
 
 
 
-in the http://10.10.240.142/key-1-of-3.txt we get our first flag. And in the same location fsocity.dic file is a very long wordlist when we look at the second flag hint it says: There's something fishy about this wordlist... Why is it so long?  so i when we look inside of the file there is so much words repeates and most of them is very short so we guess its a password list so we should find the login page and username and we should make fsocity.dic file shorter. In gobuster we saw /login directory when we go the page we see its a wordpress login page:
+in the http://10.10.240.142/key-1-of-3.txt we get our first flag. And in the same location fsocity.dic file is a very long wordlist when we look at the second flag hint it says: There's something fishy about this wordlist... Why is it so long?  so when we look inside of the file there is so much words repeates and most of them is very short. So we should find the login page, username and we should make fsocity.dic file shorter. In gobuster we saw /login directory when we go the page we see its a wordpress login page:
 
 
 
@@ -228,7 +228,7 @@ in the http://10.10.240.142/key-1-of-3.txt we get our first flag. And in the sam
 
 
 
-So there is a useful flaw in the site it says the invalid usernames. We see there is no user named admin according to we are in the MrRobot Ctf when we try elliot as username we receive a different message:
+So there is a useful flaw in the site it says the invalid usernames. We see there is no user named admin. When we think we are in the MrRobot Ctf when we try elliot as username we receive a different message:
 
 
 
@@ -236,7 +236,7 @@ So there is a useful flaw in the site it says the invalid usernames. We see ther
 
 
 
-So now we should make our fscotiy.dic file shorter.I think our friend elliot doesn't use passwords shorter than six digits. I coded a python program that finds words longer than five digits and writes this words only once to a new wordlist. Programs source code is:
+So now we should make our fscotiy.dic file shorter.I think our friend elliot doesn't use passwords shorter than six digits. I coded a python program that finds words longer than five digits and writes this words only once to a new wordlist. Program's source code is:
 
 
 
@@ -267,7 +267,7 @@ if __name__ == "__main__":
 ```
 
 
-This program makes a shorter wordlist called new.txt .But we need a another tool to start bruteforce attack on login page. This site is built with wordpress so we can use the tool called wpscan if dont have it you can install it with this commands:
+This program makes a shorter wordlist called new.txt . But we need a another tool to start bruteforce attack on login page. This site is built with wordpress. So we can use the tool named wpscan if you dont have it you can install it with this commands:
 
 
 
@@ -289,7 +289,7 @@ sudo gem install wpscan
 
 
 
-For start bruteforce attack we can use this command:
+For to start bruteforce attack we can use this command:
 
 
 
@@ -325,7 +325,7 @@ nc -lvnp 1234
 
 
 
-After some search i found a way to get a reverse shell. First we activate All In One SEO Pack after that we edit file. I used https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php . But if we just paste this reverse shell into the plugin it says Invalid Header so we change it like this:
+After some search i found a way to get a reverse shell. First we activate All In One SEO Pack after that we edit file. I used https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php . But if we just paste this reverse shell into the plugin it says Invalid Header. So we change it like this:
 
 
 
@@ -557,7 +557,7 @@ function printit ($string) {
 
 
 
-When we paste this code and click update file we get our reverse shell as user daemon when we go to the home page we see there is a user called robot. In robot directory there is password.raw-md5 and our second flag key-2-of-3.txt . We cant read it. But we can read  password.raw-md5 file and there is md5 encoded passsword of robot when we decode it in https://md5hashing.net/hash/md5/c3fcd3d76192e4007dfb496cca67e13b  we see password is abcdefghijklmnopqrstuvwxyz when we login with this password we are in as user robot:
+When we paste this code and click update file we get our reverse shell as user daemon. When we go to the home page we see there is a user named robot. In robot directory there is password.raw-md5 and our second flag key-2-of-3.txt . We cant read key-2-of-3.txt. But we can read  password.raw-md5 file and there is md5 encoded passsword of user robot. When we decode it in https://md5hashing.net/hash/md5/c3fcd3d76192e4007dfb496cca67e13b  we see password is abcdefghijklmnopqrstuvwxyz . When we login with this password we are in as user robot:
 
 
 
