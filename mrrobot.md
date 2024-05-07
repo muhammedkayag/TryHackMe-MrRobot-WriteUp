@@ -228,7 +228,7 @@ in the http://10.10.240.142/key-1-of-3.txt we get our first flag. And in the sam
 
 
 
-So there is a useful flaw in the site it says the invalid usernames. We see there is no user named admin. When we think we are in the MrRobot Ctf when we try elliot as username we receive a different message:
+So there is a useful flaw in the site it says the invalid usernames. We see there is no user named admin. When we think we are in the Mr.Robot Ctf if we try elliot as username we receive a different message:
 
 
 
