@@ -650,7 +650,7 @@ For to get a root shell with  nmap we gi to the https://gtfobins.github.io/gtfob
 
 
 
-![](pics/m8.png)
+![](pics/M8.png)
 
 
 
