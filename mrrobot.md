@@ -2,11 +2,11 @@
 
 
 
-[Link to room on TryHackMe.com](https://tryhackme.com/r/room/0day)
+[Link to room on TryHackMe.com](https://tryhackme.com/r/room/mrrobot)
 
 
 
-Hello friend, welcome to my MrRobot WriteUp! MrRobot is one of the best shows i have ever watched. In this writeup i am gonna show you how i did solve this ctf. So first we start with the enumeration with rustscan and nmap:
+Hello friend, welcome to my MrRobot WriteUp! Mr.Robot is one of the best shows i have ever watched. In this writeup i am gonna show you how did i solve this ctf. So first we start with the enumeration with rustscan and nmap:
 
 
 
@@ -557,7 +557,7 @@ function printit ($string) {
 
 
 
-When we paste this code and click update file we get our reverse shell as user daemon. When we go to the home page we see there is a user named robot. In robot directory there is password.raw-md5 and our second flag key-2-of-3.txt . We cant read key-2-of-3.txt. But we can read  password.raw-md5 file and there is md5 encoded passsword of user robot. When we decode it in https://md5hashing.net/hash/md5/c3fcd3d76192e4007dfb496cca67e13b  we see password is abcdefghijklmnopqrstuvwxyz . When we login with this password we are in as user robot:
+When we paste this code and click update file we get our reverse shell as user daemon. When we go to the home page we see there is a user named robot. In robot directory there is password.raw-md5 and our second flag key-2-of-3.txt . We cant read key-2-of-3.txt. But we can read  password.raw-md5 . Insıde of it there is md5 encoded passsword of user robot. When we decode it in https://md5hashing.net/hash/md5/c3fcd3d76192e4007dfb496cca67e13b  we see password is abcdefghijklmnopqrstuvwxyz . When we login with this password we are in as user robot:
 
 
 
@@ -646,7 +646,7 @@ find / -perm -u=s -type f 2>/dev/null
 ```
 
 
-For to get a root shell with  nmap we gi to the https://gtfobins.github.io/gtfobins/nmap/ and then we use this commands from the site to get a root shell:
+For to get a root shell with  nmap we go to the https://gtfobins.github.io/gtfobins/nmap/ and then we use this commands from the site to get a root shell:
 
 
 
@@ -697,7 +697,7 @@ cat key-3-of-3.txt
 
 
 
-And done we got our final flag. Thanks for reading!
+And done, we got our final flag. Thanks for reading!
 
 
 
