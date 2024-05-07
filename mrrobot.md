@@ -260,7 +260,7 @@ def main():
 
 if __name__ == "__main__":
     main()
-
+```
 
 
 This program makes a shorter wordlist called new.txt .But we need a another tool to start bruteforce attack on login page. This site is built with wordpress so we can use the tool caled wpscan if dont have it you can install it with this commands:
