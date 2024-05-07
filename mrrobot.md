@@ -236,7 +236,7 @@ So there is a useful flaw in the site it says the invalid usernames. We see ther
 
 
 
-So now we should make our fscotiy.dic file shorter.I think our friend elliot doesn't use passwords shorter than six digits. I coded a python program that finds words longer than five digits and writes this words only once to a new wordlist. Program's source code is:
+So now we should make our fscotiy.dic wordlist shorter.I think our friend elliot doesn't use passwords shorter than six digits. I coded a python program that finds words longer than five digits and writes this words only once to a new wordlist. Program's source code is:
 
 
 
@@ -325,7 +325,7 @@ nc -lvnp 1234
 
 
 
-After some search i found a way to get a reverse shell. First we activate All In One SEO Pack after that we edit file. I used https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php . But if we just paste this reverse shell into the plugin it says Invalid Header. So we change it like this:
+After some search i found a way to get a reverse shell. First we activate All In One SEO Pack plugin after that we edit it. I used https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php . But if we just paste this reverse shell into the plugin it says Invalid Header. So we change it like this:
 
 
 
@@ -557,7 +557,7 @@ function printit ($string) {
 
 
 
-When we paste this code and click update file we get our reverse shell as user daemon. When we go to the home page we see there is a user named robot. In robot directory there is password.raw-md5 and our second flag key-2-of-3.txt . We cant read key-2-of-3.txt. But we can read  password.raw-md5 . Insıde of it there is md5 encoded passsword of user robot. When we decode it in https://md5hashing.net/hash/md5/c3fcd3d76192e4007dfb496cca67e13b  we see password is abcdefghijklmnopqrstuvwxyz . When we login with this password we are in as user robot:
+When we paste this code and click update file we get our reverse shell as user daemon. When we go to the home page we see there is a user named robot. In robot directory there is password.raw-md5 and our second flag key-2-of-3.txt . We cant read key-2-of-3.txt. But we can read  password.raw-md5 . Inside of it there is md5 encoded passsword of user robot. When we decode it in https://md5hashing.net/hash/md5/c3fcd3d76192e4007dfb496cca67e13b  we see password is abcdefghijklmnopqrstuvwxyz . When we login with this password we are in as user robot:
 
 
 
