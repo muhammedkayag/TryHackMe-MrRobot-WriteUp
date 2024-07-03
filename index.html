@@ -74,6 +74,10 @@
     OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
     Nmap done: 1 IP address (1 host up) scanned in 163.35 seconds
 
+    
+</code></pre>
+<p>So we see only two ports are open and with this services and the versions we cant do something useful. We keep enumeration on port 80 with gobuster:</p>
+<pre style="background-color: #d3d3d3; padding: 10px; border-radius: 5px; overflow-x: auto;"><code>
     ┌─[root@parrot]─[/home/parrot]
     └──╼ #gobuster dir -u http://10.10.240.142 -w common.txt -x php,html,txt,old,cgi
     ===============================================================
@@ -181,9 +185,7 @@
     ===============================================================
     Finished
     ===============================================================
-</code></pre>
-<p>So we see only two ports are open and with this services and the versions we cant do something useful. We keep enumeration on port 80 with gobuster:</p>
-
+</code></pre>    
 <p>And then we see some directories. When we go to the website a cool terminal welcomes us:</p>
 <p><img src="pics/m1.png" alt=""></p>
 <p>when we use the commands we dont get something useful. So we decide to look at the robots.txt file and there is really important infos:</p>
