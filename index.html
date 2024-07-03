@@ -195,29 +195,31 @@
 <p>So there is a useful flaw in the site it says the invalid usernames. We see there is no user named admin. When we think we are in the Mr.Robot Ctf if we try elliot as username we receive a different message:</p>
 <p><img src="pics/m4.png" alt=""></p>
 <p>So now we should make our fscotiy.dic wordlist shorter.I think our friend elliot doesn&#39;t use passwords shorter than six digits. I coded a python program that finds words longer than five digits and writes this words only once to a new wordlist. Program&#39;s source code is:</p>
-<pre><code>def main():
-    input_file = &#39;fsocity.dic&#39;
-    output_file = &#39;new.txt&#39;
+<div style="position: relative; background-color: #d3d3d3; padding: 10px; border-radius: 5px; overflow-x: auto;"><button style='position: absolute; top: 10px; right: 10px; padding: 5px 10px; background-color: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;' onclick="navigator.clipboard.writeText(this.nextElementSibling.innerText).then(() => { this.innerText='Copied'; setTimeout(() => { this.innerText='Copy Code'; }, 2000); });">Copy Code</button><pre><code> </code></pre></div>
+    def main():
+    input_file = 'fsocity.dic'
+    output_file = 'new.txt'
 
     
     filtered_words = set()
 
     
-    with open(input_file, &#39;r&#39;) as file:
+    with open(input_file, 'r') as file:
         for line in file:
             word = line.strip()
-            if len(word) &gt; 5:
+            if len(word) > 5:
                 filtered_words.add(word)
 
     
-    with open(output_file, &#39;w&#39;) as file:
+    with open(output_file, 'w') as file:
         for word in filtered_words:
-            file.write(word + &#39;\n&#39;)
+            file.write(word + '\n')
 
     
 
-if __name__ == &quot;__main__&quot;:
-    main()
+    if __name__ == "__main__":
+        main()
+    
 </code></pre>
 <p>This program makes a shorter wordlist called new.txt . But we need a another tool to start bruteforce attack on login page. This site is built with wordpress. So we can use the tool named wpscan if you dont have it you can install it with this commands:</p>
 <pre><code>sudo apt-get update 
