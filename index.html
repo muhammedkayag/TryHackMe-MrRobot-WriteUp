@@ -114,20 +114,23 @@
         <div class="photo-container">
             <p><a href="https://tryhackme.com/r/room/mrrobot">Link to room on TryHackMe.com</a></p>
             <p>Hello friend, welcome to my Mr.Robot WriteUp! Mr.Robot is one of the best shows i have ever watched. In this writeup i am gonna show you how did i solve this ctf. So first we start enumeration with rustscan and nmap:</p>            
-            <div style="position: relative; background-color: #ffffff; padding: 10px; border-radius: 5px; overflow-x: auto;color: black;"><button style='position: absolute; top: 10px; right: 10px; padding: 5px 10px; background-color: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;' onclick="navigator.clipboard.writeText(this.nextElementSibling.innerText).then(() => { this.innerText='Copied'; setTimeout(() => { this.innerText='Copy Code'; }, 2000); });">Copy Code</button><pre><code><p>
+            <div style="position: relative; background-color: #ffffff; padding: 10px; border-radius: 5px; overflow-x: auto;color: black;"><button style='position: absolute; top: 10px; right: 10px; padding: 5px 10px; background-color: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;' onclick="navigator.clipboard.writeText(this.nextElementSibling.innerText).then(() => { this.innerText='Copied'; setTimeout(() => { this.innerText='Copy Code'; }, 2000); });">Copy Code</button><pre><code>
     ┌─[root@parrot]─[/home/parrot]
     └──╼ #rustscan -a 10.10.240.142
     .----. .-. .-. .----..---.  .----. .---.   .--.  .-. .-.
-    | {}  }| { } |{ {__ {_   <em>}{ {</em>_  /  ___} / {} \ |  <code>| |     | .-. \| {_} |.-._} } | |  .-._} }\     }/  /\  \| |\  |     </code>-&#39; <code>-&#39;</code>-----&#39;<code>----&#39;  </code>-&#39;  <code>----&#39;  </code>---&#39; <code>-&#39;  </code>-&#39;<code>-&#39; </code>-&#39;
+    | {}  || { } |{ {__ {_   _}{ {__  /  ___} / {} \ |  `| |
+    | .-. \| {_} |.-._} } | |  .-._} |\     |/  /\  \| |\  |
+    `-' `-'`-----'`----'  `-'  `----'  `---' `-'  `-'`-' `-'
     The Modern Day Port Scanner.
     ________________________________________
-    : <a href="http://discord.skerritt.blog">http://discord.skerritt.blog</a>         :
-    : <a href="https://github.com/RustScan/RustScan">https://github.com/RustScan/RustScan</a> :
-        --------------------------------------
-    Scanning ports like it&#39;s my full-time job. Wait, it is.</p>
-    <pre><code>[~] The config file is expected to be at &quot;/root/.rustscan.toml&quot;
+    : http://discord.skerritt.blog         :
+    : https://github.com/RustScan/RustScan :
+    --------------------------------------
+    Scanning ports like it's my full-time job. Wait, it is.
+    
+    [~] The config file is expected to be at "/root/.rustscan.toml"
     [!] File limit is lower than default batch size. Consider upping with --ulimit. May cause harm to sensitive servers
-    [!] Your file limit is very small, which negatively impacts RustScan&#39;s speed. Use the Docker image, or up the Ulimit with &#39;--ulimit 5000&#39;. 
+    [!] Your file limit is very small, which negatively impacts RustScan's speed. Use the Docker image, or up the Ulimit with '--ulimit 5000'. 
     Open 10.10.240.142:80
     Open 10.10.240.142:443
     [~] Starting Script(s)
@@ -164,13 +167,13 @@
     PORT    STATE  SERVICE  VERSION
     80/tcp  open   http     Apache httpd
     |_http-server-header: Apache
-    |_http-title: Site doesn&#39;t have a title (text/html).
+    |_http-title: Site doesn't have a title (text/html).
     443/tcp open   ssl/http Apache httpd
     | ssl-cert: Subject: commonName=www.example.com
     | Not valid before: 2015-09-16T10:45:03
     |_Not valid after:  2025-09-13T10:45:03
     |_http-server-header: Apache
-    |_http-title: Site doesn&#39;t have a title (text/html).
+    |_http-title: Site doesn't have a title (text/html).
     Aggressive OS guesses: Linux 3.10 - 3.13 (89%), Linux 5.4 (89%), Linux 3.10 - 4.11 (88%), Linux 3.13 (88%), Linux 3.13 or 4.2 (88%), Linux 3.2 - 3.8 (88%), Linux 4.2 (88%), Linux 4.4 (88%), Linux 3.12 (87%), Linux 3.16 (87%)
     No exact OS matches for host (test conditions non-ideal).
     Network Distance: 5 hops
@@ -183,7 +186,6 @@
     
     OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
     Nmap done: 1 IP address (1 host up) scanned in 163.35 seconds
-</code></pre>
             </code></pre></div>
             <p></p>
             <p>So we see only two ports are open and with this services and the versions we cant do something useful. We keep enumeration on port 80 with gobuster:</p>
@@ -226,52 +228,52 @@
     /.htpasswd.html       (Status: 403) [Size: 223]
     Progress: 709 / 27690 (2.56%)[ERROR] context deadline exceeded (Client.Timeout or context cancellation while reading body)
     [ERROR] context deadline exceeded (Client.Timeout or context cancellation while reading body)
-    /0                    (Status: 301) [Size: 0] [--> http://10.10.240.142/0/]
-    /admin                (Status: 301) [Size: 235] [--> http://10.10.240.142/admin/]
-    /atom                 (Status: 301) [Size: 0] [--> http://10.10.240.142/feed/atom/]
-    /audio                (Status: 301) [Size: 235] [--> http://10.10.240.142/audio/]
-    /blog                 (Status: 301) [Size: 234] [--> http://10.10.240.142/blog/]
+    /0                    (Status: 301) [Size: 0] [--&gt; http://10.10.240.142/0/]
+    /admin                (Status: 301) [Size: 235] [--&gt; http://10.10.240.142/admin/]
+    /atom                 (Status: 301) [Size: 0] [--&gt; http://10.10.240.142/feed/atom/]
+    /audio                (Status: 301) [Size: 235] [--&gt; http://10.10.240.142/audio/]
+    /blog                 (Status: 301) [Size: 234] [--&gt; http://10.10.240.142/blog/]
     /cgi-bin/.html        (Status: 403) [Size: 222]
-    /css                  (Status: 301) [Size: 233] [--> http://10.10.240.142/css/]
-    /dashboard            (Status: 302) [Size: 0] [--> http://10.10.240.142/wp-admin/]
+    /css                  (Status: 301) [Size: 233] [--&gt; http://10.10.240.142/css/]
+    /dashboard            (Status: 302) [Size: 0] [--&gt; http://10.10.240.142/wp-admin/]
     /favicon.ico          (Status: 200) [Size: 0]
-    /feed                 (Status: 301) [Size: 0] [--> http://10.10.240.142/feed/]
-    /image                (Status: 301) [Size: 0] [--> http://10.10.240.142/image/]
-    /Image                (Status: 301) [Size: 0] [--> http://10.10.240.142/Image/]
-    /images               (Status: 301) [Size: 236] [--> http://10.10.240.142/images/]
-    /index.php            (Status: 301) [Size: 0] [--> http://10.10.240.142/]
+    /feed                 (Status: 301) [Size: 0] [--&gt; http://10.10.240.142/feed/]
+    /image                (Status: 301) [Size: 0] [--&gt; http://10.10.240.142/image/]
+    /Image                (Status: 301) [Size: 0] [--&gt; http://10.10.240.142/Image/]
+    /images               (Status: 301) [Size: 236] [--&gt; http://10.10.240.142/images/]
+    /index.php            (Status: 301) [Size: 0] [--&gt; http://10.10.240.142/]
     /index.html           (Status: 200) [Size: 1188]
     /index.html           (Status: 200) [Size: 1188]
-    /index.php            (Status: 301) [Size: 0] [--> http://10.10.240.142/]
+    /index.php            (Status: 301) [Size: 0] [--&gt; http://10.10.240.142/]
     Progress: 12692 / 27690 (45.84%)[ERROR] context deadline exceeded (Client.Timeout or context cancellation while reading body)
-    /js                   (Status: 301) [Size: 232] [--> http://10.10.240.142/js/]
+    /js                   (Status: 301) [Size: 232] [--&gt; http://10.10.240.142/js/]
     /license              (Status: 200) [Size: 309]
     /license.txt          (Status: 200) [Size: 309]
-    /login                (Status: 302) [Size: 0] [--> http://10.10.240.142/wp-login.php]
-    /page1                (Status: 301) [Size: 0] [--> http://10.10.240.142/]
+    /login                (Status: 302) [Size: 0] [--&gt; http://10.10.240.142/wp-login.php]
+    /page1                (Status: 301) [Size: 0] [--&gt; http://10.10.240.142/]
     /phpmyadmin           (Status: 403) [Size: 94]
-    /rdf                  (Status: 301) [Size: 0] [--> http://10.10.240.142/feed/rdf/]
+    /rdf                  (Status: 301) [Size: 0] [--&gt; http://10.10.240.142/feed/rdf/]
     /readme               (Status: 200) [Size: 64]
     /readme.html          (Status: 200) [Size: 64]
     /robots               (Status: 200) [Size: 41]
     /robots.txt           (Status: 200) [Size: 41]
     /robots.txt           (Status: 200) [Size: 41]
-    /rss                  (Status: 301) [Size: 0] [--> http://10.10.240.142/feed/]
-    /rss2                 (Status: 301) [Size: 0] [--> http://10.10.240.142/feed/]
+    /rss                  (Status: 301) [Size: 0] [--&gt; http://10.10.240.142/feed/]
+    /rss2                 (Status: 301) [Size: 0] [--&gt; http://10.10.240.142/feed/]
     /sitemap              (Status: 200) [Size: 0]
     /sitemap.xml          (Status: 200) [Size: 0]
-    /video                (Status: 301) [Size: 235] [--> http://10.10.240.142/video/]
-    /wp-admin             (Status: 301) [Size: 238] [--> http://10.10.240.142/wp-admin/]
+    /video                (Status: 301) [Size: 235] [--&gt; http://10.10.240.142/video/]
+    /wp-admin             (Status: 301) [Size: 238] [--&gt; http://10.10.240.142/wp-admin/]
     /wp-app.php           (Status: 403) [Size: 0]
-    /wp-atom.php          (Status: 301) [Size: 0] [--> http://10.10.240.142/feed/atom/]
-    /wp-commentsrss2.php  (Status: 301) [Size: 0] [--> http://10.10.240.142/comments/feed/]
+    /wp-atom.php          (Status: 301) [Size: 0] [--&gt; http://10.10.240.142/feed/atom/]
+    /wp-commentsrss2.php  (Status: 301) [Size: 0] [--&gt; http://10.10.240.142/comments/feed/]
     /wp-config.php        (Status: 200) [Size: 0]
     /wp-config            (Status: 200) [Size: 0]
-    /wp-content           (Status: 301) [Size: 240] [--> http://10.10.240.142/wp-content/]
+    /wp-content           (Status: 301) [Size: 240] [--&gt; http://10.10.240.142/wp-content/]
     /wp-cron.php          (Status: 200) [Size: 0]
     /wp-cron              (Status: 200) [Size: 0]
-    /wp-feed.php          (Status: 301) [Size: 0] [--> http://10.10.240.142/feed/]
-    /wp-includes          (Status: 301) [Size: 241] [--> http://10.10.240.142/wp-includes/]
+    /wp-feed.php          (Status: 301) [Size: 0] [--&gt; http://10.10.240.142/feed/]
+    /wp-includes          (Status: 301) [Size: 241] [--&gt; http://10.10.240.142/wp-includes/]
     /wp-links-opml        (Status: 200) [Size: 227]
     /wp-load              (Status: 200) [Size: 0]
     /wp-links-opml.php    (Status: 200) [Size: 227]
@@ -280,14 +282,14 @@
     /wp-login.php         (Status: 200) [Size: 2671]
     /wp-mail              (Status: 500) [Size: 3064]
     /wp-mail.php          (Status: 500) [Size: 3025]
-    /wp-rdf.php           (Status: 301) [Size: 0] [--> http://10.10.240.142/feed/rdf/]
-    /wp-register.php      (Status: 301) [Size: 0] [--> http://10.10.240.142/wp-login.php?action=register]
-    /wp-rss.php           (Status: 301) [Size: 0] [--> http://10.10.240.142/feed/]
-    /wp-rss2.php          (Status: 301) [Size: 0] [--> http://10.10.240.142/feed/]
+    /wp-rdf.php           (Status: 301) [Size: 0] [--&gt; http://10.10.240.142/feed/rdf/]
+    /wp-register.php      (Status: 301) [Size: 0] [--&gt; http://10.10.240.142/wp-login.php?action=register]
+    /wp-rss.php           (Status: 301) [Size: 0] [--&gt; http://10.10.240.142/feed/]
+    /wp-rss2.php          (Status: 301) [Size: 0] [--&gt; http://10.10.240.142/feed/]
     /wp-settings          (Status: 500) [Size: 0]
     /wp-settings.php      (Status: 500) [Size: 0]
-    /wp-signup            (Status: 302) [Size: 0] [--> http://10.10.240.142/wp-login.php?action=register]
-    /wp-signup.php        (Status: 302) [Size: 0] [--> http://10.10.240.142/wp-login.php?action=register]
+    /wp-signup            (Status: 302) [Size: 0] [--&gt; http://10.10.240.142/wp-login.php?action=register]
+    /wp-signup.php        (Status: 302) [Size: 0] [--&gt; http://10.10.240.142/wp-login.php?action=register]
     /xmlrpc.php           (Status: 405) [Size: 42]
     /xmlrpc               (Status: 405) [Size: 42]
     /xmlrpc.php           (Status: 405) [Size: 42]
