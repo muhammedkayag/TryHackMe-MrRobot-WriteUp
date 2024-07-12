@@ -114,23 +114,20 @@
         <div class="photo-container">
             <p><a href="https://tryhackme.com/r/room/mrrobot">Link to room on TryHackMe.com</a></p>
             <p>Hello friend, welcome to my Mr.Robot WriteUp! Mr.Robot is one of the best shows i have ever watched. In this writeup i am gonna show you how did i solve this ctf. So first we start enumeration with rustscan and nmap:</p>            
-            <div style="position: relative; background-color: #ffffff; padding: 10px; border-radius: 5px; overflow-x: auto;color: black;"><button style='position: absolute; top: 10px; right: 10px; padding: 5px 10px; background-color: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;' onclick="navigator.clipboard.writeText(this.nextElementSibling.innerText).then(() => { this.innerText='Copied'; setTimeout(() => { this.innerText='Copy Code'; }, 2000); });">Copy Code</button><pre><code> 
+            <div style="position: relative; background-color: #ffffff; padding: 10px; border-radius: 5px; overflow-x: auto;color: black;"><button style='position: absolute; top: 10px; right: 10px; padding: 5px 10px; background-color: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;' onclick="navigator.clipboard.writeText(this.nextElementSibling.innerText).then(() => { this.innerText='Copied'; setTimeout(() => { this.innerText='Copy Code'; }, 2000); });">Copy Code</button><pre><code><p>
     ┌─[root@parrot]─[/home/parrot]
     └──╼ #rustscan -a 10.10.240.142
     .----. .-. .-. .----..---.  .----. .---.   .--.  .-. .-.
-    | {}  }| { } |{ {__ {_   _}{ {__  /  ___} / {} \ |  `| |
-    | .-. \| {_} |.-._} } | |  .-._} }\     }/  /\  \| |\  |
-    `-' `-'`-----'`----'  `-'  `----'  `---' `-'  `-'`-' `-'
+    | {}  }| { } |{ {__ {_   <em>}{ {</em>_  /  ___} / {} \ |  <code>| |     | .-. \| {_} |.-._} } | |  .-._} }\     }/  /\  \| |\  |     </code>-&#39; <code>-&#39;</code>-----&#39;<code>----&#39;  </code>-&#39;  <code>----&#39;  </code>---&#39; <code>-&#39;  </code>-&#39;<code>-&#39; </code>-&#39;
     The Modern Day Port Scanner.
     ________________________________________
-    : http://discord.skerritt.blog         :
-    : https://github.com/RustScan/RustScan :
+    : <a href="http://discord.skerritt.blog">http://discord.skerritt.blog</a>         :
+    : <a href="https://github.com/RustScan/RustScan">https://github.com/RustScan/RustScan</a> :
         --------------------------------------
-    Scanning ports like it's my full-time job. Wait, it is.
-    
-    [~] The config file is expected to be at "/root/.rustscan.toml"
+    Scanning ports like it&#39;s my full-time job. Wait, it is.</p>
+    <pre><code>[~] The config file is expected to be at &quot;/root/.rustscan.toml&quot;
     [!] File limit is lower than default batch size. Consider upping with --ulimit. May cause harm to sensitive servers
-    [!] Your file limit is very small, which negatively impacts RustScan's speed. Use the Docker image, or up the Ulimit with '--ulimit 5000'. 
+    [!] Your file limit is very small, which negatively impacts RustScan&#39;s speed. Use the Docker image, or up the Ulimit with &#39;--ulimit 5000&#39;. 
     Open 10.10.240.142:80
     Open 10.10.240.142:443
     [~] Starting Script(s)
@@ -167,13 +164,13 @@
     PORT    STATE  SERVICE  VERSION
     80/tcp  open   http     Apache httpd
     |_http-server-header: Apache
-    |_http-title: Site doesn't have a title (text/html).
+    |_http-title: Site doesn&#39;t have a title (text/html).
     443/tcp open   ssl/http Apache httpd
     | ssl-cert: Subject: commonName=www.example.com
     | Not valid before: 2015-09-16T10:45:03
     |_Not valid after:  2025-09-13T10:45:03
     |_http-server-header: Apache
-    |_http-title: Site doesn't have a title (text/html).
+    |_http-title: Site doesn&#39;t have a title (text/html).
     Aggressive OS guesses: Linux 3.10 - 3.13 (89%), Linux 5.4 (89%), Linux 3.10 - 4.11 (88%), Linux 3.13 (88%), Linux 3.13 or 4.2 (88%), Linux 3.2 - 3.8 (88%), Linux 4.2 (88%), Linux 4.4 (88%), Linux 3.12 (87%), Linux 3.16 (87%)
     No exact OS matches for host (test conditions non-ideal).
     Network Distance: 5 hops
@@ -186,6 +183,7 @@
     
     OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
     Nmap done: 1 IP address (1 host up) scanned in 163.35 seconds
+</code></pre>
             </code></pre></div>
             <p></p>
             <p>So we see only two ports are open and with this services and the versions we cant do something useful. We keep enumeration on port 80 with gobuster:</p>
